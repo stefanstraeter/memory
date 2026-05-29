@@ -1,5 +1,101 @@
-$font-primary: "Orbitron", sans-serif;
-$color-bg: #f7f4ef;
-$color-text: #1d1d1d;
-$color-accent: #0e7c7b;
-$container-max-width: 1200px;
+@use "sass:map";
+
+// 1. GLOBALE KONFIGURATION (Das Skelett)
+// Hier kommt alles rein, was in JEDEM Theme gleich bleibt.
+$global-config: (
+  "fonts": (
+    "orbitron": "'Orbitron', sans-serif",
+    "almarai": "'Almarai', sans-serif",
+    "red-rose": "'Red Rose', serif",
+  ),
+  "retro": (
+    "border": 3px solid #1a1a1a,
+    "shadow": 6px 6px 0px 0px #1a1a1a,
+    "shadow-active": 2px 2px 0px 0px #1a1a1a,
+    "radius": 8px,
+  ),
+  "colors": (
+    "bg-dark": #303131,
+    "bg-light": #f4f4f4,
+    "text-dark": #1d1d1d,
+    "text-light": #f4f4f4,
+    "accent": #f0ea6e,
+    "light-gray": #f6f6f6,
+  ),
+  "button-base": (
+    "disabled-bg": #dbdbd6,
+    "disabled-text": #a0a0a0,
+  ),
+  "spacing": (
+    "s": 1rem,
+    "m": 2rem,
+    "l": 4rem,
+  ),
+  "content-width": 1200px,
+);
+
+// 2. THEME-SPEZIFISCHE KONFIGURATION (Die Haut)
+// WICHTIG: Die Keys (links) müssen in beiden Themes exakt gleich heißen!
+$themes: (
+  "code-vibes": (
+    "main-bg": #303131,
+    "player-1": #2ab2ff,
+    "player-2": #f58e39,
+    "btn-primary-bg": #f0ea6e,
+    "btn-primary-text": #303131,
+    "btn-exit-bg": #303131,
+    "btn-exit-hover": #46615c,
+    "btn-exit-text": #f4f4f4,
+    "btn-back-bg": #65cfbc,
+    "btn-back-hover": #94ddd0,
+    "card-back": #3ec6ad,
+  ),
+  "gaming": (
+    "main-bg": #294f60,
+    "player-1": #ea6900,
+    "player-2": #087fc5,
+    "btn-primary-bg": #ed1a76,
+    "btn-primary-text": #ffffff,
+    "btn-exit-bg": #394b62,
+    "btn-exit-hover": #444863,
+    "btn-exit-text": #f4f4f4,
+    "btn-back-bg": #ed1b76,
+    "btn-back-hover": #f4f4f4,
+    "card-back": #e94560,
+  ),
+);
+
+// 3. HELFER-FUNKTIONEN
+// Zugriff auf globale Werte: global("fonts", "orbitron")
+@function global($group, $key) {
+  @return map.get(map.get($global-config, $group), $key);
+}
+
+// Zugriff auf Theme-Werte (für statische Abfragen): theme-val("gaming", "main-bg")
+@function theme-val($theme, $key) {
+  @return map.get(map.get($themes, $theme), $key);
+}
+
+// 4. SCHNELL-ZUGRIFF VARIABLEN (Statisch)
+$font-main: global("fonts", "orbitron");
+$font-secondary: global("fonts", "almarai");
+$retro-border: global("retro", "border");
+$retro-shadow: global("retro", "shadow");
+
+// 5. DYNAMISCHES THEMING (CSS-Variablen)
+// Dieser Loop erstellt automatisch alle Variablen für das aktuelle Theme.
+:root {
+  // Standard-Theme beim Laden
+  @each $key, $value in map.get($themes, "code-vibes") {
+    --#{$key}: #{$value};
+  }
+}
+
+// Wenn in HTML <body data-theme="gaming"> gesetzt wird
+@each $theme-name, $map in $themes {
+  body[data-theme="#{$theme-name}"] {
+    @each $key, $value in $map {
+      --#{$key}: #{$value};
+    }
+  }
+}
