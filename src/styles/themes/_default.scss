@@ -1,1 +1,28 @@
-/* Theme overrides go here */
+@use "../abstracts/variables" as v;
+@use "sass:map";
+
+// ============================================================
+// CSS Custom Properties (CSS-Variablen)
+//
+// Warum hier und nicht in _variables.scss?
+// -> _variables.scss darf kein CSS ausgeben, nur Daten speichern.
+// -> Diese Datei erzeugt den echten CSS-Code im Browser.
+//
+// Im Browser kannst du dann var(--main-bg) in jedem Element nutzen.
+// ============================================================
+
+// Standard-Theme: code-vibes
+:root {
+  @each $key, $value in map.get(v.$themes, "code-vibes") {
+    --#{$key}: #{$value};
+  }
+}
+
+// Theme-Wechsel: <body data-theme="gaming">
+@each $theme-name, $map in v.$themes {
+  body[data-theme="#{$theme-name}"] {
+    @each $key, $value in $map {
+      --#{$key}: #{$value};
+    }
+  }
+}
