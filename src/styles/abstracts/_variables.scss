@@ -1,12 +1,16 @@
 @use "sass:map";
 
+// ============================================================
 // 1. GLOBALE KONFIGURATION (Das Skelett)
-// Hier kommt alles rein, was in JEDEM Theme gleich bleibt.
+// Werte, die in JEDEM Theme gleich bleiben.
+// Kein CSS hier – nur Daten!
+// ============================================================
+
 $global-config: (
   "fonts": (
-    "orbitron": "'Orbitron', sans-serif",
-    "almarai": "'Almarai', sans-serif",
-    "red-rose": "'Red Rose', serif",
+    "orbitron": ("Orbitron", sans-serif),
+    "almarai": ("Almarai", sans-serif),
+    "red-rose": ("Red Rose", serif),
   ),
   "retro": (
     "border": 3px solid #1a1a1a,
@@ -31,8 +35,10 @@ $global-config: (
     "m": 2rem,
     "l": 4rem,
   ),
-  "content-width": 1200px,
 );
+
+// Direktwert – kein Map-Zugriff nötig, einfach als Variable
+$content-width: 1200px;
 
 // 2. THEME-SPEZIFISCHE KONFIGURATION (Die Haut)
 // WICHTIG: Die Keys (links) müssen in beiden Themes exakt gleich heißen!
@@ -65,37 +71,35 @@ $themes: (
   ),
 );
 
+// ============================================================
 // 3. HELFER-FUNKTIONEN
-// Zugriff auf globale Werte: global("fonts", "orbitron")
-@function global($group, $key) {
+// Damit du nicht jedes Mal den langen map.get()-Aufruf
+// schreiben musst. Beispiel: config("fonts", "orbitron")
+// ============================================================
+
+// Zugriff auf $global-config
+@function config($group, $key) {
   @return map.get(map.get($global-config, $group), $key);
 }
 
-// Zugriff auf Theme-Werte (für statische Abfragen): theme-val("gaming", "main-bg")
+// Zugriff auf $themes (für statische Abfragen)
+// Beispiel: theme-val("gaming", "main-bg")
 @function theme-val($theme, $key) {
   @return map.get(map.get($themes, $theme), $key);
 }
 
-// 4. SCHNELL-ZUGRIFF VARIABLEN (Statisch)
-$font-main: global("fonts", "orbitron");
-$font-secondary: global("fonts", "almarai");
-$retro-border: global("retro", "border");
-$retro-shadow: global("retro", "shadow");
+// ============================================================
+// 4. SCHNELL-ZUGRIFF VARIABLEN
+// Kurze Aliases, damit du im Code z. B. $font-main schreiben
+// kannst statt config("fonts", "orbitron").
+// ============================================================
 
-// 5. DYNAMISCHES THEMING (CSS-Variablen)
-// Dieser Loop erstellt automatisch alle Variablen für das aktuelle Theme.
-:root {
-  // Standard-Theme beim Laden
-  @each $key, $value in map.get($themes, "code-vibes") {
-    --#{$key}: #{$value};
-  }
-}
+$font-main: config("fonts", "orbitron"); // Headlines, Timer
+$font-secondary: config("fonts", "almarai"); // Fließtext, Buttons
+$font-accent: config("fonts", "red-rose"); // Special Screens
+$retro-border: config("retro", "border");
+$retro-shadow: config("retro", "shadow");
 
-// Wenn in HTML <body data-theme="gaming"> gesetzt wird
-@each $theme-name, $map in $themes {
-  body[data-theme="#{$theme-name}"] {
-    @each $key, $value in $map {
-      --#{$key}: #{$value};
-    }
-  }
-}
+// CSS-Ausgabe gehört NICHT hierher.
+// Die CSS Custom Properties (--main-bg usw.) werden in
+// themes/_default.scss per Loop erzeugt.
