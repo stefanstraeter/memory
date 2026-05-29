@@ -117,7 +117,7 @@
    ========================================================================== */
 
 body {
-  font-family: v.$font-primary;
+  font-family: v.theme("fonts", "accent");
   line-height: 1.5;
-  color: v.$color-text;
+  color: v.theme("colors", "text");
 }
