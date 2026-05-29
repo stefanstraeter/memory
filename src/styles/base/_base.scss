@@ -1,0 +1,11 @@
+@use "../abstracts/variables" as v;
+
+body {
+  min-height: 100vh;
+  background: v.$color-bg;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
