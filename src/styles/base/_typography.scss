@@ -116,8 +116,11 @@
    BASE TYPOGRAPHY
    ========================================================================== */
 
-body {
-  font-family: v.theme("fonts", "accent");
-  line-height: 1.5;
-  color: v.theme("colors", "text");
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: v.$font-main;
 }
