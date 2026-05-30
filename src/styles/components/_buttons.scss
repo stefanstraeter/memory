@@ -1,1 +1,18 @@
 @use "../abstracts/variables" as v;
+
+.btn {
+  font-family: v.$font-main;
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  padding: v.$spacing-s v.$spacing-l;
+  border: none;
+  transition: transform 0.3s ease-in-out;
+
+  &--primary {
+    // Falls du spezifische Anpassungen für Primary brauchst
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
