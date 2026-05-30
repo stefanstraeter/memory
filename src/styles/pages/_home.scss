@@ -1,3 +1,18 @@
 .home {
   padding-block: 2rem;
 }
+
+.screen__content {
+  display: flex;
+  flex-direction: column;
+
+  .screen__subtitle {
+    order: -1;
+  }
+  .screen__title {
+    order: 0;
+  }
+  .btn {
+    order: 1;
+  }
+}
