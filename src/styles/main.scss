@@ -1,22 +1,7 @@
-@use "vendors/normalize";
-
-@use "abstracts/variables";
-@use "abstracts/functions";
-@use "abstracts/mixins";
-@use "abstracts/placeholders";
-
-@use "base/reset";
-@use "base/typography";
-@use "base/base";
-@use "base/utilities";
-
-@use "layout/grid";
-@use "layout/header";
-@use "layout/footer";
-
-@use "components/buttons";
-@use "components/cards";
-
-@use "pages/home";
-
-@use "themes/default";
+@use "vendors";
+@use "abstracts";
+@use "base";
+@use "components";
+@use "layout";
+@use "pages";
+@use "themes";
