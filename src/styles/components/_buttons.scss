@@ -1,18 +1,65 @@
 @use "../abstracts/variables" as v;
 
 .btn {
-  font-family: v.$font-main;
-  background-color: var(--btn-primary-bg);
-  color: var(--btn-primary-text);
-  padding: v.$spacing-s v.$spacing-l;
+  font-family: v.$font-red-rose;
+  font-weight: v.$font-weight-600;
+  padding: v.$spacing-m v.$spacing-l;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: v.$spacing-m;
+  width: auto;
   border: none;
   transition: transform 0.3s ease-in-out;
 
   &--primary {
-    // Falls du spezifische Anpassungen für Primary brauchst
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+  }
+
+  &--small {
+    font-size: v.$font-size-sm;
+    padding: v.$spacing-s v.$spacing-m;
+  }
+
+  &--medium {
+    font-size: v.$font-size-md;
+    padding: v.$spacing-m v.$spacing-l;
+  }
+
+  &--large {
+    font-size: v.$font-size-xl;
+    padding: v.$spacing-m v.$spacing-l;
+  }
+
+  &__icon {
+    width: 1.6rem;
+    height: auto;
+    transform-origin: center;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &__arrow {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: inline-block;
+    vertical-align: middle;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("/img/00_general/arrow.png");
+    transition: background-image 0.2s ease-in-out;
   }
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
+
+    .btn__icon {
+      transform: rotate(-32deg);
+    }
+
+    .btn__arrow {
+      background-image: url("/img/00_general/arrow_bold.png");
+    }
   }
 }
