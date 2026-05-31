@@ -9,39 +9,52 @@
 
   <body data-theme="code-vibes">
     <div id="app">
-      <section id="screen-start" class="screen">
-        <div class="screen__content">
-          <h1 class="screen__title">Ready to play?</h1>
-          <h4 class="screen__subtitle">It's time to play</h4>
-          <button id="btn-to-settings" class="btn btn--primary">Play</button>
-        </div>
-      </section>
+      <section id="screen-home" class="screen home">
+        <div class="home__content">
+          <span class="home__subtitle">It's time to play</span>
+          <h1 class="home__title">Ready to play?</h1>
 
-      <section id="screen-settings" class="screen screen--hidden">
-        <div class="settings">
-          <h2 class="settings__title">Settings</h2>
-          <div class="settings__group">
-            <p class="settings__label">Theme</p>
-            <div class="settings__options"></div>
+          <div class="home__actions">
+            <button class="btn btn--primary btn--large">
+              <img src="/img/00_general/stadia_controller.png" class="btn__icon" />
+              Play
+              <span class="btn__arrow"></span>
+            </button>
           </div>
-          <button id="btn-start-game" class="btn btn--primary">Start Game</button>
+        </div>
+        <img src="/img/00_general/stadia_controller_yellow.png" class="home__controller" alt="" />
+      </section>
+
+      <section id="screen-settings" class="screen settings u-hidden">
+        <div class="settings__container">
+          <h2 class="settings__title">Settings</h2>
+          <div class="settings__group"></div>
+          <button id="btn-start-game" class="btn btn--primary btn--large">Start Game</button>
         </div>
       </section>
 
-      <section id="screen-game" class="screen screen--hidden">
-        <div class="game-board">
+      <section id="screen-game" class="screen game u-hidden">
+        <header class="game__header"></header>
+        <div class="game__board">
           <div id="memory-grid" class="game-board__grid"></div>
         </div>
       </section>
 
-      <section id="screen-result" class="screen screen--hidden">
-        <div class="result">
-          <h2 class="result__title">Game Over</h2>
-          <div class="result__winner">
-            <img src="/img/00_general/pockal.png" class="result__icon" alt="Winner" />
-            <p class="result__text">Blue Player wins!</p>
+      <section id="screen-gameover" class="screen gameover u-hidden">
+        <div class="gameover__content">
+          <h2 class="gameover__title">GAME OVER</h2>
+          <button id="btn-see-results" class="btn btn--primary btn--large">See Results</button>
+        </div>
+      </section>
+
+      <section id="screen-result" class="screen result u-hidden">
+        <div class="result__card">
+          <h2 class="result__title">The Winner is...</h2>
+          <div class="result__winner-info">
+            <img src="/img/00_general/pockal.png" alt="Winner" class="result__icon" />
+            <p class="result__player-name">Orange Player</p>
           </div>
-          <button class="btn btn--primary">Play Again</button>
+          <button id="btn-restart" class="btn btn--primary">Play Again</button>
         </div>
       </section>
     </div>
