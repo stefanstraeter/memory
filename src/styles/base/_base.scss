@@ -1,16 +1,14 @@
 @use "../abstracts/variables" as v;
 
-.screen {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  transition: opacity 0.3s ease;
+#app {
+  height: 100%;
+}
 
-  // BEM Modifier für das Ausblenden
-  &--hidden {
-    display: none;
-    opacity: 0;
+.screen {
+  display: none;
+
+  &--active {
+    display: flex;
+    min-height: 100dvh;
   }
 }
