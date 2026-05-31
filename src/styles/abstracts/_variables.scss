@@ -58,7 +58,15 @@ $global-config: (
     "xl": 1.5rem,
     "2xl": 2rem,
     "3xl": 3rem,
-    "4xl": 4rem,
+    "7xl": 7rem,
+  ),
+  "font-weight": (
+    "300": 300,
+    "400": 400,
+    "500": 500,
+    "600": 600,
+    "700": 700,
+    "800": 800,
   ),
 );
 
@@ -115,9 +123,9 @@ $themes: (
     QUICK ACCESS VARIABLES
    ============================================================ */
 
-$font-main: config("fonts", "orbitron");
-$font-secondary: config("fonts", "almarai");
-$font-accent: config("fonts", "red-rose");
+$font-orbitron: config("fonts", "orbitron");
+$font-almarai: config("fonts", "almarai");
+$font-red-rose: config("fonts", "red-rose");
 
 // $retro-border: config("retro", "border");
 // $retro-shadow: config("retro", "shadow");
@@ -153,4 +161,11 @@ $font-size-lg: config("font-size", "lg");
 $font-size-xl: config("font-size", "xl");
 $font-size-2xl: config("font-size", "2xl");
 $font-size-3xl: config("font-size", "3xl");
-$font-size-4xl: config("font-size", "4xl");
+$font-size-7xl: config("font-size", "7xl");
+
+$font-weight-300: config("font-weight", "300");
+$font-weight-400: config("font-weight", "400");
+$font-weight-500: config("font-weight", "500");
+$font-weight-600: config("font-weight", "600");
+$font-weight-700: config("font-weight", "700");
+$font-weight-800: config("font-weight", "800");
