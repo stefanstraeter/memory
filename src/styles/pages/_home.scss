@@ -1,15 +1,15 @@
 @use "../abstracts/variables" as v;
+@use "../abstracts/mixins" as m;
 
 .home {
-  display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  background-color: var(--main-bg);
-  text-align: center;
+  justify-content: center;
+  background-color: var(--main-bg-dark);
+  position: relative;
 
   &__content {
-    display: flex;
-    flex-direction: column;
+    @include m.flex-center();
   }
 
   &__subtitle {
@@ -26,6 +26,7 @@
 
   &__actions {
     margin-top: v.$spacing-3xl;
+    text-align: center;
   }
 
   &__controller {
