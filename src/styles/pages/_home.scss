@@ -1,18 +1,38 @@
+@use "../abstracts/variables" as v;
+
 .home {
-  padding-block: 2rem;
-}
-
-.screen__content {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-bg);
+  text-align: center;
 
-  .screen__subtitle {
-    order: -1;
+  &__content {
+    display: flex;
+    flex-direction: column;
   }
-  .screen__title {
-    order: 0;
+
+  &__subtitle {
+    font-size: v.$font-size-2xl;
+    color: v.$color-text-light;
+    text-align: left;
   }
-  .btn {
-    order: 1;
+
+  &__title {
+    font-family: v.$font-red-rose;
+    color: v.$color-text-light;
+    margin: 0;
+  }
+
+  &__actions {
+    margin-top: v.$spacing-3xl;
+  }
+
+  &__controller {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 24rem;
+    height: auto;
   }
 }
