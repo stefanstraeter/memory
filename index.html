@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="public/img/00_general/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/img/00_general/favicon.svg" />
     <title>Memory Game</title>
   </head>
 
@@ -27,6 +27,83 @@
 
       <section id="screen-settings" class="screen settings">
         <h2 class="settings__title">Settings</h2>
+        <div class="settings__divider"></div>
+
+        <div class="settings__content">
+          <div class="settings__left">
+            <fieldset class="settings__fieldset">
+              <legend class="settings__legend">
+                <img src="/img/00_general/palette.svg" alt="" />
+                Game themes
+              </legend>
+              <label class="settings__label">
+                <input type="radio" name="theme" value="code-vibes" />
+                Code vibes
+                <span class="label__indicator"></span>
+              </label>
+              <label class="settings__label">
+                <input type="radio" name="theme" value="gaming" />
+                Gaming
+                <span class="label__indicator"></span>
+              </label>
+            </fieldset>
+
+            <fieldset class="settings__fieldset">
+              <legend class="settings__legend">
+                <img src="/img/00_general/chess_pawn.svg" alt="" />
+                Choose player
+              </legend>
+              <label class="settings__label">
+                <input type="radio" name="player" value="blue" />
+                Blue
+                <span class="label__indicator"></span>
+              </label>
+              <label class="settings__label">
+                <input type="radio" name="player" value="orange" />
+                Orange
+                <span class="label__indicator"></span>
+              </label>
+            </fieldset>
+
+            <fieldset class="settings__fieldset">
+              <legend class="settings__legend">
+                <img src="/img/00_general/style.svg" alt="" />
+                Board size
+              </legend>
+              <label class="settings__label">
+                <input type="radio" name="board-size" value="16" />
+                16 cards
+                <span class="label__indicator"></span>
+              </label>
+              <label class="settings__label">
+                <input type="radio" name="board-size" value="24" />
+                24 cards
+                <span class="label__indicator"></span>
+              </label>
+              <label class="settings__label">
+                <input type="radio" name="board-size" value="36" />
+                36 cards
+                <span class="label__indicator"></span>
+              </label>
+            </fieldset>
+          </div>
+
+          <div class="settings__right">
+            <img id="theme-preview" class="settings__preview-img" src="/img/01_themes/vibes_theme/vibe_theme.png" alt="Theme preview" />
+
+            <div class="settings__bar">
+              <span id="selected-theme" class="settings__bar-item">Game theme</span>
+              <span class="settings__bar-divider">/</span>
+              <span id="selected-player" class="settings__bar-item">Player</span>
+              <span class="settings__bar-divider">/</span>
+              <span id="selected-size" class="settings__bar-item">Board size</span>
+              <button id="btn-start" class="btn btn--primary settings__bar-btn" disabled>
+                <img src="/img/00_general/smart_display.svg" class="btn__icon" alt="" />
+                Start
+              </button>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="screen-game" class="screen game">
