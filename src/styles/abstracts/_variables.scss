@@ -31,7 +31,7 @@ $global-config: (
     "text-dark": #1d1d1d,
     "text-light": #f4f4f4,
     "accent": #f0ea6e,
-    "light-gray": #f6f6f6,
+    "light-gray": #ebebeb,
   ),
   "button-ui": (
     "bg": #f0ea6e,
@@ -49,6 +49,7 @@ $global-config: (
     "xl": 2rem,
     "2xl": 3rem,
     "3xl": 4rem,
+    "4xl": 5rem,
   ),
   "font-size": (
     "xs": 0.75rem,
@@ -154,6 +155,7 @@ $spacing-l: config("spacing", "l");
 $spacing-xl: config("spacing", "xl");
 $spacing-2xl: config("spacing", "2xl");
 $spacing-3xl: config("spacing", "3xl");
+$spacing-4xl: config("spacing", "4xl");
 
 $font-size-xs: config("font-size", "xs");
 $font-size-sm: config("font-size", "sm");
