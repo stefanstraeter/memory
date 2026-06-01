@@ -1,3 +1,182 @@
+@use "../abstracts/variables" as v;
+@use "../abstracts/mixins" as m;
+
 .settings {
   background-color: var(--main-bg-light);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: v.$spacing-3xl v.$spacing-3xl;
+
+  // ── Title ────────────────────────────────────
+  &__title {
+    font-family: v.$font-red-rose;
+    font-size: v.$font-size-3xl;
+    font-weight: v.$font-weight-700;
+    color: v.$color-text-dark;
+    margin: 0;
+    width: 100%;
+    max-width: v.$content-width;
+  }
+
+  &__divider {
+    height: 4px;
+    width: 100%;
+    max-width: v.$content-width;
+    background: linear-gradient(to right, #{v.$color-accent} 18rem, transparent 18rem);
+    margin-top: v.$spacing-s;
+    margin-bottom: v.$spacing-4xl;
+    position: relative;
+
+    &::before {
+      content: "◆";
+      position: absolute;
+      left: -0.8rem;
+      top: 50%;
+      transform: translateY(-58%);
+      font-size: 2rem;
+      color: v.$color-accent;
+      line-height: 1;
+    }
+  }
+
+  // ── Content grid ─────────────────────────────
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: v.$spacing-3xl;
+    width: 100%;
+    max-width: v.$content-width;
+    align-items: start;
+  }
+
+  // ── Left column ──────────────────────────────
+  &__left {
+    display: flex;
+    flex-direction: column;
+    gap: v.$spacing-2xl;
+  }
+
+  // ── Fieldset ─────────────────────────────────
+  &__fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: v.$spacing-s;
+  }
+
+  &__legend {
+    font-family: v.$font-red-rose;
+    font-size: v.$font-size-lg;
+    font-weight: v.$font-weight-700;
+    color: v.$color-text-dark;
+    display: flex;
+    align-items: center;
+    gap: v.$spacing-s;
+    margin-bottom: v.$spacing-s;
+    float: none;
+    width: 100%;
+
+    img {
+      width: 1.4rem;
+      height: 1.4rem;
+      object-fit: contain;
+    }
+  }
+
+  // ── Labels ───────────────────────────────────
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: v.$spacing-m;
+    padding-left: v.$spacing-xl;
+    font-size: v.$font-size-md;
+    color: v.$color-text-dark;
+    cursor: pointer;
+    position: relative;
+
+    // hide native radio
+    input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    // custom circle
+    .label__indicator {
+      display: inline-block;
+      width: 1.1rem;
+      height: 1.1rem;
+      border: 2px solid #bbb;
+      border-radius: 50%;
+      flex-shrink: 0;
+      position: relative;
+      order: -1; // circle before text
+      transition: border-color 0.2s;
+    }
+
+    input[type="radio"]:checked ~ .label__indicator {
+      border-color: v.$color-text-dark;
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 2px;
+        border-radius: 50%;
+        background-color: v.$color-text-dark;
+      }
+    }
+  }
+
+  // ── Right column ─────────────────────────────
+  &__right {
+    display: flex;
+    flex-direction: column;
+    gap: v.$spacing-l;
+  }
+
+  &__preview-img {
+    width: 100%;
+    border-radius: 12px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+    background-color: v.$color-bg-dark;
+  }
+
+  // ── Bottom bar ───────────────────────────────
+  &__bar {
+    background-color: v.$color-light-gray;
+    border-radius: 8px;
+    padding: v.$spacing-m v.$spacing-l;
+    display: flex;
+    align-items: center;
+    gap: v.$spacing-s;
+  }
+
+  &__bar-item {
+    font-size: v.$font-size-md;
+    color: v.$color-text-dark;
+    font-weight: v.$font-weight-500;
+  }
+
+  &__bar-divider {
+    color: v.$color-accent;
+    font-size: v.$font-size-3xl;
+    font-weight: v.$font-weight-700;
+  }
+
+  &__bar-btn {
+    margin-left: auto;
+
+    &:disabled {
+      background-color: v.$btn-ui-disabled-bg;
+      color: v.$btn-ui-disabled-text;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
 }
