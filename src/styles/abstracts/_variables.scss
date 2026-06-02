@@ -91,9 +91,13 @@ $themes: (
     "btn-back-bg": #65cfbc,
     "btn-back-hover": #94ddd0,
     "card-back": #3ec6ad,
+    "status-font-size": 1.25rem,
+    "status-font-weight": 700,
   ),
   "gaming": (
     "main-bg": #294f60,
+    "main-bg-dark": #294f60,
+    "main-bg-light": #1a3344,
     "player-1": #ea6900,
     "player-2": #087fc5,
     "btn-primary-bg": #ed1a76,
@@ -104,6 +108,8 @@ $themes: (
     "btn-back-bg": #ed1b76,
     "btn-back-hover": #f4f4f4,
     "card-back": #e94560,
+    "status-font-size": 1rem,
+    "status-font-weight": 800,
   ),
 );
 
