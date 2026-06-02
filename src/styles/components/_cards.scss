@@ -1,0 +1,72 @@
+.card {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  perspective: 1000px;
+
+  &__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 300ms ease-in-out;
+  }
+
+  &__front,
+  &__back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__front {
+    background-color: var(--main-bg-dark);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  &__back {
+    transform: rotateY(180deg);
+
+    img {
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+
+  &.is-flipped &__inner {
+    transform: rotateY(180deg);
+  }
+
+  &.is-matched {
+    cursor: default;
+
+    .card__inner {
+      transform: rotateY(180deg);
+    }
+  }
+
+  &--matched-blue {
+    outline: 4px solid #2bb1ff;
+    border-radius: 8px;
+  }
+
+  &--matched-orange {
+    outline: 4px solid #f58e39;
+    border-radius: 8px;
+  }
+}
