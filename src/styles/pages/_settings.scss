@@ -161,6 +161,18 @@
     font-size: v.$font-size-md;
     color: v.$color-text-dark;
     font-weight: v.$font-weight-500;
+    display: inline-block;
+    text-align: center;
+  }
+
+  #selected-theme {
+    min-width: 6rem;
+  }
+  #selected-player {
+    min-width: 4.5rem;
+  }
+  #selected-size {
+    min-width: 4.5rem;
   }
 
   &__bar-divider {
