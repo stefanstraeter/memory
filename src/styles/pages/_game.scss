@@ -1,0 +1,99 @@
+@use "../abstracts/variables" as v;
+@use "../abstracts/mixins" as m;
+
+.game {
+  background-color: var(--main-bg-dark);
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: v.$spacing-l v.$spacing-3xl;
+
+  &__header {
+    width: 100%;
+    max-width: v.$content-width;
+    margin-bottom: v.$spacing-l;
+  }
+
+  &__status {
+    @include m.flex-center(row, space-between);
+    gap: v.$spacing-m;
+  }
+
+  &__board {
+    width: 100%;
+    max-width: v.$content-width;
+  }
+}
+
+.status {
+  &__scores {
+    @include m.flex-center(row, flex-start);
+    gap: v.$spacing-l;
+  }
+
+  &__current {
+    @include m.flex-center(row, flex-start);
+    gap: v.$spacing-m;
+    color: var(--main-bg-light);
+  }
+}
+
+// ── Score labels ─────────────────────────────
+.score {
+  display: flex;
+  align-items: center;
+  gap: v.$spacing-s;
+  font-size: var(--status-font-size);
+  font-weight: var(--status-font-weight);
+  color: var(--main-bg-light);
+
+  &--blue {
+    color: var(--player-1);
+  }
+  &--orange {
+    color: var(--player-2);
+  }
+
+  &__icon {
+    height: 0.8rem;
+    width: auto;
+    object-fit: contain;
+  }
+}
+
+// ── Current player indicator ─────────────────
+.current-indicator {
+  height: 0.8rem;
+  width: auto;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+// ── Font family per theme ─────────────────────
+body[data-theme="code-vibes"] .game__status {
+  font-family: v.$font-red-rose;
+}
+
+body[data-theme="gaming"] .game__status {
+  font-family: v.$font-orbitron;
+}
+
+// ── Board grid ───────────────────────────────
+.game-board__grid {
+  display: grid;
+  justify-content: center;
+  gap: v.$spacing-m;
+  margin-top: v.$spacing-m;
+
+  &.grid--16 {
+    grid-template-columns: repeat(4, minmax(0, 120px));
+  }
+
+  &.grid--24 {
+    grid-template-columns: repeat(6, minmax(0, 100px));
+  }
+
+  &.grid--36 {
+    grid-template-columns: repeat(6, minmax(0, 100px));
+  }
+}
