@@ -10,7 +10,7 @@ const selectedThemeLabel = document.getElementById('selected-theme') as HTMLSpan
 const selectedPlayerLabel = document.getElementById('selected-player') as HTMLSpanElement;
 const selectedSizeLabel = document.getElementById('selected-size') as HTMLSpanElement;
 
-const themePreviews: Record<string, string> = {
+const themePreviews = {
   'code-vibes': '/img/01_themes/vibes_theme/vibe_theme.png',
   'gaming': '/img/01_themes/game_theme/game_theme.png',
 };
@@ -38,8 +38,13 @@ function setupNavigation(): void {
 function setupThemeRadios(): void {
   document.querySelectorAll<HTMLInputElement>('input[name="theme"]').forEach(radio => {
     radio.addEventListener('change', () => {
-      if (themePreview) themePreview.src = themePreviews[radio.value] ?? themePreviews['code-vibes'];
-      if (selectedThemeLabel) selectedThemeLabel.textContent = radio.closest('label')?.textContent?.trim() ?? 'Game theme';
+      if (themePreview) {
+        const themeKey = radio.value as keyof typeof themePreviews;
+        themePreview.src = themePreviews[themeKey] ?? themePreviews['code-vibes'];
+      }
+      if (selectedThemeLabel) {
+        selectedThemeLabel.textContent = radio.closest('label')?.textContent?.trim() ?? 'Game theme';
+      }
       document.body.dataset.theme = radio.value === 'gaming' ? 'gaming' : 'code-vibes';
       checkStartEnabled();
     });
