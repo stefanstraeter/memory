@@ -1,3 +1,5 @@
+import { gameState } from './state';
+import { initGame } from './game';
 
 /* ==========================================================================
    DOM ELEMENTS
@@ -32,7 +34,30 @@ function checkStartEnabled(): void {
 
 function setupNavigation(): void {
   btnPlay?.addEventListener('click', () => showScreen('screen-settings'));
-  btnStart?.addEventListener('click', () => showScreen('screen-game'));
+}
+
+function setupResultScreen(): void {
+  document.getElementById('btn-see-results')?.addEventListener('click', () => {
+    const { scores } = gameState;
+    const winnerEl = document.querySelector('.result__player-name');
+    if (!winnerEl) return;
+
+    if (scores.blue > scores.orange) {
+      winnerEl.textContent = 'Blue Player';
+    } else if (scores.orange > scores.blue) {
+      winnerEl.textContent = 'Orange Player';
+    } else {
+      winnerEl.textContent = "It's a draw!";
+    }
+
+    showScreen('screen-result');
+  });
+}
+
+function setupRestartButton(): void {
+  document.getElementById('btn-restart')?.addEventListener('click', () => {
+    showScreen('screen-home');
+  });
 }
 
 function setupThemeRadios(): void {
@@ -76,19 +101,27 @@ function setupBoardSizeRadios(): void {
 export function initUI(): void {
   showScreen('screen-home');
   setupNavigation();
+  setupResultScreen();
+  setupRestartButton();
   setupThemeRadios();
   setupPlayerRadios();
   setupBoardSizeRadios();
 }
 
-
-/**
- * @description Show the specified screen and hide all others
- * @export
- * @param {string} screenId - The ID of the screen to show
- */
 export function showScreen(screenId: string): void {
   document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('screen--active'));
   document.getElementById(screenId)?.classList.add('screen--active');
 }
 
+btnStart?.addEventListener('click', () => {
+  const theme = document.querySelector<HTMLInputElement>('input[name="theme"]:checked')?.value;
+  const player = document.querySelector<HTMLInputElement>('input[name="player"]:checked')?.value;
+  const size = document.querySelector<HTMLInputElement>('input[name="board-size"]:checked')?.value;
+
+  gameState.theme = theme as 'code-vibes' | 'gaming';
+  gameState.player = (player ?? 'blue') as 'blue' | 'orange';
+  gameState.boardSize = parseInt(size ?? '16');
+
+  initGame(); 
+  showScreen('screen-game');
+});
