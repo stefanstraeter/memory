@@ -81,7 +81,7 @@ $themes: (
   "code-vibes": (
     "main-bg-dark": #303131,
     "main-bg-light": #f4f4f4,
-    "player-1": #2ab2ff,
+    "player-1": #2bb1ff,
     "player-2": #f58e39,
     "btn-primary-bg": #f0ea6e,
     "btn-primary-text": #303131,
@@ -93,13 +93,14 @@ $themes: (
     "card-back": #3ec6ad,
     "status-font-size": 1.25rem,
     "status-font-weight": 700,
+    "scores-bg": #415652,
   ),
   "gaming": (
     "main-bg": #294f60,
     "main-bg-dark": #294f60,
     "main-bg-light": #1a3344,
-    "player-1": #ea6900,
-    "player-2": #087fc5,
+    "player-1": #2bb1ff,
+    "player-2": #f58e39,
     "btn-primary-bg": #ed1a76,
     "btn-primary-text": #ffffff,
     "btn-exit-bg": #394b62,
@@ -110,6 +111,7 @@ $themes: (
     "card-back": #e94560,
     "status-font-size": 1rem,
     "status-font-weight": 800,
+    "scores-bg": #f4f4f4,
   ),
 );
 
