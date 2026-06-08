@@ -63,3 +63,11 @@
     }
   }
 }
+
+body[data-theme="gaming"] .btn:hover {
+  transform: none;
+}
+
+body[data-theme="gaming"] .btn:hover .btn__icon {
+  transform: none;
+}
