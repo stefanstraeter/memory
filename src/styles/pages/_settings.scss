@@ -129,6 +129,33 @@
         background-color: v.$color-text-dark;
       }
     }
+
+    // ── Hover effect ─────────────────────────
+    &:hover {
+      &::before {
+        content: "";
+        display: block;
+        order: 99;
+        width: 2rem;
+        height: 3px;
+        background: rgb(240, 234, 110);
+        flex-shrink: 0;
+        align-self: center;
+      }
+
+      &::after {
+        content: "◆";
+        order: 100;
+        color: rgb(240, 234, 110);
+        font-size: 1.2rem;
+        line-height: 1;
+        align-self: center;
+        margin-left: calc(-1 * #{v.$spacing-m});
+        position: relative;
+        top: -1px;
+        left: -0.5rem;
+      }
+    }
   }
 
   // ── Right column ─────────────────────────────
