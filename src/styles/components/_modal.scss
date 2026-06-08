@@ -1,0 +1,118 @@
+@use "../abstracts/variables" as v;
+
+.game-exit-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: v.$spacing-l;
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: 50;
+
+  &.is-open {
+    display: flex;
+  }
+
+  &__dialog {
+    width: min(100%, 34rem);
+    background-color: #ffffff;
+    padding: v.$spacing-xl v.$spacing-2xl;
+    display: flex;
+    flex-direction: column;
+    gap: v.$spacing-l;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: v.$font-size-2xl;
+    font-weight: v.$font-weight-700;
+    color: v.$color-text-dark;
+    text-align: center;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    gap: v.$spacing-m;
+  }
+
+  &__btn {
+    flex: 1;
+  }
+}
+
+body[data-theme="code-vibes"] {
+  .game-exit-modal {
+    font-family: v.$font-red-rose;
+    font-size: v.$font-size-lg;
+
+    &__dialog {
+      border-radius: 0;
+    }
+
+    &__btn--back {
+      background-color: #4cd5bc;
+      color: #ffffff;
+      border: 2px solid #4cd5bc;
+    }
+
+    &__btn--exit {
+      background-color: #eefcf9;
+      color: #425651;
+      border: 2px solid #4cd5bc;
+    }
+
+    &__btn--back:hover,
+    &__btn--exit:hover {
+      transform: none;
+      box-shadow: 0 2px 6px #4cd5bc8c;
+    }
+
+    &__btn--back:hover {
+      background-color: #5be6cd;
+    }
+
+    &__btn--exit:hover {
+      background-color: #e0f7f2;
+    }
+  }
+}
+
+body[data-theme="gaming"] {
+  .game-exit-modal {
+    font-family: v.$font-orbitron;
+    font-size: v.$font-size-lg;
+
+    &__dialog {
+      border-radius: 0.75rem;
+    }
+
+    &__btn--back {
+      background-color: #ed1a76;
+      color: #ffffff;
+      border: 2px solid #ed1a76;
+      border-radius: 0.75rem;
+      padding: v.$spacing-m;
+    }
+
+    &__btn--exit {
+      background-color: #f0e4ef;
+      color: #e71d4f;
+      border: 2px solid #e71d4f;
+      border-radius: 0.75rem;
+      padding: v.$spacing-m;
+    }
+
+    &__btn--back:hover,
+    &__btn--exit:hover {
+      transform: none;
+      box-shadow: 0 2px 6px #e71d4f8c;
+      background-color: #f0e5ee;
+    }
+
+    &__btn--back:hover {
+      color: #ed1a76;
+    }
+  }
+}
