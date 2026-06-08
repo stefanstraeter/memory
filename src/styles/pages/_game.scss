@@ -12,6 +12,7 @@
     width: 100%;
     max-width: v.$content-width;
     margin-bottom: v.$spacing-l;
+    padding: v.$spacing-xl;
   }
 
   &__status {
@@ -29,6 +30,8 @@
   &__scores {
     @include m.flex-center(row, flex-start);
     gap: v.$spacing-l;
+    background-color: var(--scores-bg);
+    padding: v.$spacing-m;
   }
 
   &__current {
@@ -55,7 +58,7 @@
   }
 
   &__icon {
-    height: 0.8rem;
+    height: 1.2rem;
     width: auto;
     object-fit: contain;
   }
@@ -63,19 +66,91 @@
 
 // ── Current player indicator ─────────────────
 .current-indicator {
-  height: 0.8rem;
+  height: 1.2rem;
   width: auto;
   object-fit: contain;
   vertical-align: middle;
 }
 
 // ── Font family per theme ─────────────────────
-body[data-theme="code-vibes"] .game__status {
-  font-family: v.$font-red-rose;
+body[data-theme="code-vibes"] {
+  .game__status {
+    font-family: v.$font-red-rose;
+
+    #btn-exit-game {
+      background-color: #425651;
+      color: #ffffff;
+      border: 2px solid #4cd5bc;
+
+      &:hover {
+        transform: none;
+        box-shadow: 0 2px 6px #4cd5bc8c;
+      }
+    }
+  }
+
+  .game__header {
+    background-color: transparent;
+  }
 }
 
-body[data-theme="gaming"] .game__status {
-  font-family: v.$font-orbitron;
+body[data-theme="gaming"] {
+  .game__status {
+    font-family: v.$font-orbitron;
+
+    #btn-exit-game {
+      --exit-accent: #e71d4f;
+      background-color: transparent;
+      border: 2px solid var(--exit-accent);
+      border-radius: 0.5rem;
+      color: #ffffff;
+      box-shadow: 0 2px 6px #e71d4f8c;
+
+      img {
+        display: none;
+      }
+
+      &::before {
+        content: "";
+        width: 1rem;
+        height: 1rem;
+        flex-shrink: 0;
+        background-color: currentColor;
+        -webkit-mask-image: url("/img/00_general/move_item.png");
+        -webkit-mask-position: center;
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-size: contain;
+        mask-image: url("/img/00_general/move_item.png");
+        mask-position: center;
+        mask-repeat: no-repeat;
+        mask-size: contain;
+      }
+
+      &:hover {
+        color: var(--exit-accent);
+        box-shadow: 0 3px 8px #e71d4f8c;
+      }
+    }
+  }
+
+  .game__header {
+    background-color: #535d75;
+    border-radius: 0.5rem;
+  }
+
+  .game-exit-modal .btn--exit::before {
+    display: none;
+  }
+
+  .status__scores {
+    border-radius: 0.5rem;
+  }
+
+  .status__current {
+    color: v.$color-bg-light;
+    font-size: v.$font-size-lg;
+    font-weight: v.$font-weight-700;
+  }
 }
 
 // ── Board grid ───────────────────────────────
