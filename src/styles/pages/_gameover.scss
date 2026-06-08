@@ -1,0 +1,55 @@
+@use "../abstracts/variables" as v;
+@use "../abstracts/mixins" as m;
+
+.gameover {
+  background-color: var(--main-bg-dark);
+  @include m.flex-center();
+
+  &__content {
+    width: min(100%, 56rem);
+    padding: v.$spacing-2xl;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: v.$spacing-l;
+    text-align: center;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: v.$font-weight-700;
+    color: var(--main-bg-light);
+    line-height: 1;
+  }
+
+  &__subtitle {
+    margin: 0;
+    font-size: v.$font-size-2xl;
+    color: var(--main-bg-light);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  &__scores {
+    margin-bottom: v.$spacing-l;
+  }
+}
+
+body[data-theme="code-vibes"] .gameover {
+  font-family: v.$font-red-rose;
+
+  .gameover__title {
+    color: #4bd5bd;
+    font-family: v.$font-red-rose;
+  }
+}
+
+body[data-theme="gaming"] .gameover {
+  font-family: v.$font-orbitron;
+
+  .gameover__title {
+    color: #ed1b76;
+    font-family: v.$font-orbitron;
+  }
+}
