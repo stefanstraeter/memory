@@ -70,7 +70,7 @@ function setupThemeRadios(): void {
       if (selectedThemeLabel) {
         selectedThemeLabel.textContent = radio.closest('label')?.textContent?.trim() ?? 'Game theme';
       }
-      document.body.dataset.theme = radio.value === 'gaming' ? 'gaming' : 'code-vibes';
+      // document.body.dataset.theme = radio.value === 'gaming' ? 'gaming' : 'code-vibes';
       checkStartEnabled();
     });
   });
@@ -121,6 +121,8 @@ btnStart?.addEventListener('click', () => {
   gameState.theme = theme as 'code-vibes' | 'gaming';
   gameState.player = (player ?? 'blue') as 'blue' | 'orange';
   gameState.boardSize = parseInt(size ?? '16');
+
+  document.body.dataset.theme = gameState.theme;
 
   initGame(); 
   showScreen('screen-game');
