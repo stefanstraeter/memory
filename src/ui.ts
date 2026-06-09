@@ -1,26 +1,23 @@
 import { gameState } from './state';
 import { initGame } from './game';
-
-/* ==========================================================================
-   DOM ELEMENTS
-   ========================================================================== */
-
-const btnPlay = document.getElementById('btnPlay') as HTMLButtonElement;
-const btnStart = document.getElementById('btn-start') as HTMLButtonElement;
-const themePreview = document.getElementById('theme-preview') as HTMLImageElement;
-const selectedThemeLabel = document.getElementById('selected-theme') as HTMLSpanElement;
-const selectedPlayerLabel = document.getElementById('selected-player') as HTMLSpanElement;
-const selectedSizeLabel = document.getElementById('selected-size') as HTMLSpanElement;
-
-const themePreviews = {
-  'code-vibes': '/img/01_themes/vibes_theme/vibe_theme.png',
-  'gaming': '/img/01_themes/game_theme/game_theme.png',
-};
+import {
+  btnPlay,
+  btnStart,
+  selectedPlayerLabel,
+  selectedSizeLabel,
+  selectedThemeLabel,
+  themePreview,
+  themePreviews,
+} from './ui/dom';
+import { getActiveTheme, setupThemeSyncObserver, syncEndScreenTheme, type Theme } from './ui/theme';
 
 /* ==========================================================================
    HELPERS
    ========================================================================== */
 
+/**
+ * Enables the start button only when all required settings are selected.
+ */
 function checkStartEnabled(): void {
   const theme = document.querySelector<HTMLInputElement>('input[name="theme"]:checked');
   const player = document.querySelector<HTMLInputElement>('input[name="player"]:checked');
@@ -28,48 +25,20 @@ function checkStartEnabled(): void {
   btnStart.disabled = !(theme && player && size);
 }
 
-function getActiveTheme(): 'code-vibes' | 'gaming' {
-  return document.body.dataset.theme === 'gaming' ? 'gaming' : 'code-vibes';
-}
-
-function applyEndScreenButtonLabels(theme: 'code-vibes' | 'gaming'): void {
-  const label = theme === 'gaming' ? 'home' : 'Back to start';
-  const winnerButton = document.getElementById('btn-back-to-start-winner');
-  const drawButton = document.getElementById('btn-back-to-start-draw');
-
-  if (winnerButton) winnerButton.textContent = label;
-  if (drawButton) drawButton.textContent = label;
-}
-
-function applyEndScreenThemeAssets(theme: 'code-vibes' | 'gaming'): void {
-  const drawIcon = document.querySelector<HTMLImageElement>('.draw__icon');
-  if (!drawIcon) return;
-
-  drawIcon.src = theme === 'gaming' ? '/img/00_general/draw_icon_game.png' : '/img/00_general/draw_icon_code.png';
-  drawIcon.alt = 'Draw icon';
-}
-
-function setupThemeSyncObserver(): void {
-  const observer = new MutationObserver(() => {
-    const activeTheme = getActiveTheme();
-    applyEndScreenButtonLabels(activeTheme);
-    applyEndScreenThemeAssets(activeTheme);
-  });
-
-  observer.observe(document.body, {
-    attributes: true,
-    attributeFilter: ['data-theme'],
-  });
-}
-
 /* ==========================================================================
    SETUP FUNCTIONS
    ========================================================================== */
 
+/**
+ * Wires the home play button to open the settings screen.
+ */
 function setupNavigation(): void {
   btnPlay?.addEventListener('click', () => showScreen('screen-settings'));
 }
 
+/**
+ * Wires winner/draw screen buttons back to the home screen.
+ */
 function setupWinnerScreen(): void {
   const backButtons = [
     document.getElementById('btn-back-to-start-winner'),
@@ -84,6 +53,9 @@ function setupWinnerScreen(): void {
   });
 }
 
+/**
+ * Wires theme radio buttons and updates previews and labels.
+ */
 function setupThemeRadios(): void {
   document.querySelectorAll<HTMLInputElement>('input[name="theme"]').forEach(radio => {
     radio.addEventListener('change', () => {
@@ -94,15 +66,17 @@ function setupThemeRadios(): void {
       if (selectedThemeLabel) {
         selectedThemeLabel.textContent = radio.closest('label')?.textContent?.trim() ?? 'Game theme';
       }
-      const nextTheme = radio.value === 'gaming' ? 'gaming' : 'code-vibes';
-      applyEndScreenButtonLabels(nextTheme);
-      applyEndScreenThemeAssets(nextTheme);
+      const nextTheme: Theme = radio.value === 'gaming' ? 'gaming' : 'code-vibes';
+      syncEndScreenTheme(nextTheme);
       // document.body.dataset.theme = radio.value === 'gaming' ? 'gaming' : 'code-vibes';
       checkStartEnabled();
     });
   });
 }
 
+/**
+ * Wires player radio buttons and updates selected player label.
+ */
 function setupPlayerRadios(): void {
   document.querySelectorAll<HTMLInputElement>('input[name="player"]').forEach(radio => {
     radio.addEventListener('change', () => {
@@ -112,6 +86,9 @@ function setupPlayerRadios(): void {
   });
 }
 
+/**
+ * Wires board size radio buttons and updates selected board size label.
+ */
 function setupBoardSizeRadios(): void {
   document.querySelectorAll<HTMLInputElement>('input[name="board-size"]').forEach(radio => {
     radio.addEventListener('change', () => {
@@ -121,43 +98,53 @@ function setupBoardSizeRadios(): void {
   });
 }
 
+/**
+ * Wires the start button to transfer settings into state and launch a game.
+ */
+function setupStartButton(): void {
+  btnStart?.addEventListener('click', () => {
+    const theme = document.querySelector<HTMLInputElement>('input[name="theme"]:checked')?.value;
+    const player = document.querySelector<HTMLInputElement>('input[name="player"]:checked')?.value;
+    const size = document.querySelector<HTMLInputElement>('input[name="board-size"]:checked')?.value;
+
+    gameState.theme = (theme ?? 'code-vibes') as Theme;
+    gameState.player = (player ?? 'blue') as 'blue' | 'orange';
+    gameState.boardSize = parseInt(size ?? '16');
+
+    document.body.dataset.theme = gameState.theme;
+
+    initGame();
+    showScreen('screen-game');
+  });
+}
+
 /* ==========================================================================
    INITIALIZATION
    ========================================================================== */
 
+/**
+ * Initializes all app UI listeners and default screen state.
+ */
 export function initUI(): void {
   showScreen('screen-home');
-  const activeTheme = getActiveTheme();
-  applyEndScreenButtonLabels(activeTheme);
-  applyEndScreenThemeAssets(activeTheme);
+  syncEndScreenTheme(getActiveTheme());
   setupThemeSyncObserver();
   setupNavigation();
   setupWinnerScreen();
   setupThemeRadios();
   setupPlayerRadios();
   setupBoardSizeRadios();
+  setupStartButton();
 }
 
+/**
+ * Shows one screen and hides all others.
+ *
+ * @param screenId - Target screen element id.
+ */
 export function showScreen(screenId: string): void {
   document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('screen--active'));
   document.getElementById(screenId)?.classList.add('screen--active');
 
-  const activeTheme = getActiveTheme();
-  applyEndScreenButtonLabels(activeTheme);
-  applyEndScreenThemeAssets(activeTheme);
+  syncEndScreenTheme(getActiveTheme());
 }
-
-btnStart?.addEventListener('click', () => {
-  const theme = document.querySelector<HTMLInputElement>('input[name="theme"]:checked')?.value;
-  const player = document.querySelector<HTMLInputElement>('input[name="player"]:checked')?.value;
-  const size = document.querySelector<HTMLInputElement>('input[name="board-size"]:checked')?.value;
-
-  gameState.theme = theme as 'code-vibes' | 'gaming';
-  gameState.player = (player ?? 'blue') as 'blue' | 'orange';
-  gameState.boardSize = parseInt(size ?? '16');
-
-  document.body.dataset.theme = gameState.theme;
-
-  initGame(); 
-  showScreen('screen-game');
-});
