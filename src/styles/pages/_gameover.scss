@@ -21,6 +21,7 @@
     font-weight: v.$font-weight-700;
     color: var(--main-bg-light);
     line-height: 1;
+    text-transform: uppercase;
   }
 
   &__subtitle {
@@ -50,6 +51,20 @@ body[data-theme="gaming"] .gameover {
 
   .gameover__title {
     color: #ed1b76;
+    font-family: v.$font-orbitron;
+  }
+
+  .gameover__subtitle {
+    color: #f4f4f4;
+    font-family: v.$font-orbitron;
+    font-weight: v.$font-weight-700;
+  }
+
+  .gameover__scores {
+    border-radius: 0.5rem;
+  }
+
+  .score {
     font-family: v.$font-orbitron;
   }
 }
