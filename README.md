@@ -4,7 +4,7 @@ A modern, theme-switchable Memory game built with TypeScript, Vite, and modular 
 
 Configure your match (theme, starting player, board size), play in a responsive card grid, and finish with a two-step end flow (Game Over -> Winner/Draw).
 
-🔗 **Repository:** https://github.com/stefanstraeter/memory
+🔗 **Repository:** https://stefanstraeter.github.io/memory/
 
 ---
 
