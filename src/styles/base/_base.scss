@@ -2,13 +2,19 @@
 
 #app {
   height: 100%;
+  width: 100%;
+  position: relative;
 }
 
 .screen {
-  display: none;
+  width: 100vw;
+  min-height: 100dvh;
+
+  &:not(.screen--active) {
+    display: none !important;
+  }
 
   &--active {
-    display: flex;
-    min-height: 100dvh;
+    display: flex !important;
   }
 }
