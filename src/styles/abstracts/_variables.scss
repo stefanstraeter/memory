@@ -19,12 +19,6 @@ $global-config: (
       serif,
     ),
   ),
-  "retro": (
-    "border": 3px solid #1a1a1a,
-    "shadow": 6px 6px 0px 0px #1a1a1a,
-    "shadow-active": 2px 2px 0px 0px #1a1a1a,
-    "radius": 8px,
-  ),
   "colors": (
     "bg-dark": #303131,
     "bg-light": #f4f4f4,
@@ -117,8 +111,6 @@ $themes: (
 
 /* ============================================================
    HELPER FUNCTIONS FOR QUICK ACCESS
-   - config("fonts", "orbitron") -> gives ("Orbitron", sans-serif) back
-   - theme-val("gaming", "main-bg") -> gives #294f60 back
    ============================================================ */
 
 @function config($group, $key) {
@@ -136,11 +128,6 @@ $themes: (
 $font-orbitron: config("fonts", "orbitron");
 $font-almarai: config("fonts", "almarai");
 $font-red-rose: config("fonts", "red-rose");
-
-// $retro-border: config("retro", "border");
-// $retro-shadow: config("retro", "shadow");
-// $retro-shadow-active: config("retro", "shadow-active");
-// $retro-radius: config("retro", "radius");
 
 $color-bg-dark: config("colors", "bg-dark");
 $color-bg-light: config("colors", "bg-light");
