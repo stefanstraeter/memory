@@ -1,0 +1,98 @@
+@use "../abstracts/variables" as v;
+
+.draw {
+  background-color: var(--main-bg-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__content {
+    width: min(100%, 40rem);
+    padding: v.$spacing-xl;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: v.$spacing-m;
+    text-align: center;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-weight: v.$font-weight-400;
+    color: #f4f4f4;
+    line-height: 1;
+  }
+
+  &__name {
+    margin: 0;
+    color: #4cd5bc;
+    font-size: clamp(2.4rem, 8vw, 4.8rem);
+    font-weight: v.$font-weight-700;
+    line-height: 1;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  &__icon {
+    height: 14.5rem;
+    margin-top: v.$spacing-s;
+    object-fit: contain;
+  }
+
+  &__back-btn {
+    margin-top: v.$spacing-m;
+    font-size: v.$font-size-sm;
+    padding: v.$spacing-s v.$spacing-m;
+  }
+}
+
+body[data-theme="code-vibes"] .draw {
+  font-family: v.$font-red-rose;
+
+  .draw__back-btn {
+    background-color: #425651;
+    color: #ffffff;
+    border: 2px solid #4cd5bc;
+    border-radius: 0;
+
+    &:hover {
+      transform: none;
+      box-shadow: 0 2px 6px #4cd5bc8c;
+    }
+  }
+}
+
+body[data-theme="gaming"] .draw {
+  font-family: v.$font-orbitron;
+
+  .draw__name {
+    color: #ed1b76;
+  }
+
+  .draw__back-btn {
+    background-color: transparent;
+    border: 2px solid #e71d4f;
+    border-radius: 0.75rem;
+    color: #ffffff;
+    font-size: 0;
+    box-shadow: 0 2px 6px #e71d4f8c;
+
+    img {
+      display: none;
+    }
+
+    &::after {
+      content: "Home";
+      font-size: v.$font-size-md;
+      font-weight: v.$font-weight-700;
+      color: currentColor;
+      padding-right: v.$spacing-m;
+    }
+
+    &:hover {
+      color: #e71d4f;
+      box-shadow: 0 3px 8px #e71d4f8c;
+    }
+  }
+}
