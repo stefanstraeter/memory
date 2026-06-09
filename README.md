@@ -8,18 +8,6 @@ Configure your match (theme, starting player, board size), play in a responsive 
 
 ---
 
-## Preview
-
-Add your project preview GIF or screenshot here once exported.
-
-Example path:
-
-```md
-![Memory Preview](public/img/00_general/memory-preview.gif)
-```
-
----
-
 ## Features
 
 - Multi-screen game flow: Home, Settings, Game, Game Over, Winner, Draw
