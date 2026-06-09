@@ -1,0 +1,162 @@
+@use "../abstracts/variables" as v;
+
+.winner {
+  background-color: var(--main-bg-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+
+  &__content {
+    width: min(100%, 42rem);
+    padding: v.$spacing-xl;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: v.$spacing-m;
+    text-align: center;
+  }
+
+  &__header-icon {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(96vw, 68rem);
+    max-width: none;
+    height: auto;
+    object-fit: contain;
+    margin: 0;
+    pointer-events: none;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: clamp(1.1rem, 2vw, 1.45rem);
+    font-weight: v.$font-weight-400;
+    color: #f4f4f4;
+    line-height: 1;
+  }
+
+  &__winner {
+    width: min(100%, 34rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: v.$spacing-s;
+    padding: v.$spacing-s 0 v.$spacing-xs;
+  }
+
+  &__winner-icon {
+    width: 9.5rem;
+    height: 14.5rem;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  &__winner-name {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: v.$font-weight-700;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  &__back-btn {
+    margin-top: v.$spacing-s;
+    font-size: v.$font-size-sm;
+    padding: v.$spacing-s v.$spacing-m;
+  }
+}
+
+body[data-theme="code-vibes"] .winner {
+  font-family: v.$font-red-rose;
+
+  .winner__title {
+    color: #f4f4f4;
+    font-family: v.$font-red-rose;
+  }
+
+  .winner__winner-name[data-winner="blue"],
+  .winner__winner[data-winner="blue"] .winner__winner-name {
+    color: var(--player-1);
+  }
+
+  .winner__winner-name[data-winner="orange"],
+  .winner__winner[data-winner="orange"] .winner__winner-name {
+    color: var(--player-2);
+  }
+
+  .winner__winner-name[data-winner="draw"],
+  .winner__winner[data-winner="draw"] .winner__winner-name {
+    color: #4cd5bc;
+  }
+
+  .winner__back-btn {
+    background-color: #425651;
+    color: #ffffff;
+    border: 2px solid #4cd5bc;
+    border-radius: 0;
+
+    &:hover {
+      transform: none;
+      box-shadow: 0 2px 6px #4cd5bc8c;
+    }
+  }
+}
+
+body[data-theme="gaming"] .winner {
+  font-family: v.$font-orbitron;
+
+  .winner__header-icon {
+    display: none;
+  }
+
+  .winner__title {
+    color: #f4f4f4;
+    font-family: v.$font-orbitron;
+  }
+
+  .winner__winner {
+    border-radius: 0.75rem;
+  }
+
+  .winner__winner-name[data-winner="blue"],
+  .winner__winner[data-winner="blue"] .winner__winner-name {
+    color: var(--player-1);
+  }
+
+  .winner__winner-name[data-winner="orange"],
+  .winner__winner[data-winner="orange"] .winner__winner-name {
+    color: var(--player-2);
+  }
+
+  .winner__winner-name[data-winner="draw"],
+  .winner__winner[data-winner="draw"] .winner__winner-name {
+    color: #4cd5bc;
+  }
+
+  .winner__back-btn {
+    background-color: transparent;
+    border: 2px solid #e71d4f;
+    border-radius: 0.75rem;
+    color: #ffffff;
+    font-size: 0;
+    box-shadow: 0 2px 6px #e71d4f8c;
+
+    &::after {
+      content: "Home";
+      font-size: v.$font-size-md;
+      font-weight: v.$font-weight-700;
+      color: currentColor;
+      padding-right: v.$spacing-m;
+    }
+
+    &:hover {
+      color: #e71d4f;
+      box-shadow: 0 3px 8px #e71d4f8c;
+    }
+  }
+}
