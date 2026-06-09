@@ -28,6 +28,40 @@ function checkStartEnabled(): void {
   btnStart.disabled = !(theme && player && size);
 }
 
+function getActiveTheme(): 'code-vibes' | 'gaming' {
+  return document.body.dataset.theme === 'gaming' ? 'gaming' : 'code-vibes';
+}
+
+function applyEndScreenButtonLabels(theme: 'code-vibes' | 'gaming'): void {
+  const label = theme === 'gaming' ? 'home' : 'Back to start';
+  const winnerButton = document.getElementById('btn-back-to-start-winner');
+  const drawButton = document.getElementById('btn-back-to-start-draw');
+
+  if (winnerButton) winnerButton.textContent = label;
+  if (drawButton) drawButton.textContent = label;
+}
+
+function applyEndScreenThemeAssets(theme: 'code-vibes' | 'gaming'): void {
+  const drawIcon = document.querySelector<HTMLImageElement>('.draw__icon');
+  if (!drawIcon) return;
+
+  drawIcon.src = theme === 'gaming' ? '/img/00_general/draw_icon_game.png' : '/img/00_general/draw_icon_code.png';
+  drawIcon.alt = 'Draw icon';
+}
+
+function setupThemeSyncObserver(): void {
+  const observer = new MutationObserver(() => {
+    const activeTheme = getActiveTheme();
+    applyEndScreenButtonLabels(activeTheme);
+    applyEndScreenThemeAssets(activeTheme);
+  });
+
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ['data-theme'],
+  });
+}
+
 /* ==========================================================================
    SETUP FUNCTIONS
    ========================================================================== */
@@ -36,27 +70,17 @@ function setupNavigation(): void {
   btnPlay?.addEventListener('click', () => showScreen('screen-settings'));
 }
 
-function setupResultScreen(): void {
-  document.getElementById('btn-see-results')?.addEventListener('click', () => {
-    const { scores } = gameState;
-    const winnerEl = document.querySelector('.result__player-name');
-    if (!winnerEl) return;
+function setupWinnerScreen(): void {
+  const backButtons = [
+    document.getElementById('btn-back-to-start-winner'),
+    document.getElementById('btn-back-to-start-draw'),
+  ];
 
-    if (scores.blue > scores.orange) {
-      winnerEl.textContent = 'Blue Player';
-    } else if (scores.orange > scores.blue) {
-      winnerEl.textContent = 'Orange Player';
-    } else {
-      winnerEl.textContent = "It's a draw!";
-    }
-
-    showScreen('screen-result');
-  });
-}
-
-function setupRestartButton(): void {
-  document.getElementById('btn-restart')?.addEventListener('click', () => {
-    showScreen('screen-home');
+  backButtons.forEach(button => {
+    button?.addEventListener('click', () => {
+      document.body.dataset.theme = 'code-vibes';
+      showScreen('screen-home');
+    });
   });
 }
 
@@ -70,6 +94,9 @@ function setupThemeRadios(): void {
       if (selectedThemeLabel) {
         selectedThemeLabel.textContent = radio.closest('label')?.textContent?.trim() ?? 'Game theme';
       }
+      const nextTheme = radio.value === 'gaming' ? 'gaming' : 'code-vibes';
+      applyEndScreenButtonLabels(nextTheme);
+      applyEndScreenThemeAssets(nextTheme);
       // document.body.dataset.theme = radio.value === 'gaming' ? 'gaming' : 'code-vibes';
       checkStartEnabled();
     });
@@ -100,9 +127,12 @@ function setupBoardSizeRadios(): void {
 
 export function initUI(): void {
   showScreen('screen-home');
+  const activeTheme = getActiveTheme();
+  applyEndScreenButtonLabels(activeTheme);
+  applyEndScreenThemeAssets(activeTheme);
+  setupThemeSyncObserver();
   setupNavigation();
-  setupResultScreen();
-  setupRestartButton();
+  setupWinnerScreen();
   setupThemeRadios();
   setupPlayerRadios();
   setupBoardSizeRadios();
@@ -111,6 +141,10 @@ export function initUI(): void {
 export function showScreen(screenId: string): void {
   document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('screen--active'));
   document.getElementById(screenId)?.classList.add('screen--active');
+
+  const activeTheme = getActiveTheme();
+  applyEndScreenButtonLabels(activeTheme);
+  applyEndScreenThemeAssets(activeTheme);
 }
 
 btnStart?.addEventListener('click', () => {
