@@ -16,6 +16,21 @@ function getPlayerIcon(player: 'blue' | 'orange'): string {
   return `/img/00_general/label_${player}.svg`;
 }
 
+function getWinnerIcon(player: 'blue' | 'orange'): string {
+  const activeTheme = document.body.dataset.theme === 'gaming' ? 'gaming' : 'code-vibes';
+
+  if (activeTheme === 'gaming') {
+    return '/img/00_general/draw_icon_game.png';
+  }
+
+  return `/img/00_general/chess_${player}.png`;
+}
+
+function getDrawIcon(): string {
+  const activeTheme = document.body.dataset.theme === 'gaming' ? 'gaming' : 'code-vibes';
+  return activeTheme === 'gaming' ? '/img/00_general/draw_icon_game.png' : '/img/00_general/draw_icon_code.png';
+}
+
 function shuffleArray(arr: number[]): number[] {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -197,6 +212,18 @@ function updateHeader(): void {
   }
 }
 
+type Winner = 'blue' | 'orange' | 'draw';
+
+function getWinner(): Winner {
+  if (gameState.scores.blue > gameState.scores.orange) return 'blue';
+  if (gameState.scores.orange > gameState.scores.blue) return 'orange';
+  return 'draw';
+}
+
+function getWinnerLabel(winner: Winner): string {
+  return winner === 'blue' ? 'BLUE PLAYER' : 'ORANGE PLAYER';
+}
+
 function updateGameOverScreen(): void {
   const blueIcon = document.getElementById('gameover-blue-icon') as HTMLImageElement | null;
   const orangeIcon = document.getElementById('gameover-orange-icon') as HTMLImageElement | null;
@@ -216,6 +243,43 @@ function updateGameOverScreen(): void {
   if (orangeScore) orangeScore.textContent = `${gameState.scores.orange}`;
 }
 
+function updateWinnerScreen(): void {
+  const screen = document.getElementById('screen-winner') as HTMLElement | null;
+  const winnerCard = document.querySelector<HTMLElement>('.winner__winner');
+  const winnerIcon = document.getElementById('winner-icon') as HTMLImageElement | null;
+  const winnerName = document.getElementById('winner-name');
+  const winnerBackButton = document.getElementById('btn-back-to-start-winner');
+
+  if (!screen || !winnerName) return;
+
+  const winner = getWinner();
+  if (winner === 'draw') return;
+
+  screen.dataset.winner = winner;
+  if (winnerCard) winnerCard.dataset.winner = winner;
+  winnerName.textContent = getWinnerLabel(winner);
+  if (winnerBackButton) {
+    winnerBackButton.textContent = document.body.dataset.theme === 'gaming' ? 'home' : 'Back to start';
+  }
+
+  if (winnerIcon) {
+    winnerIcon.src = getWinnerIcon(winner);
+    winnerIcon.alt = gameState.theme === 'gaming' ? 'Winner trophy' : winner;
+  }
+}
+
+function updateDrawScreen(): void {
+  const drawIcon = document.querySelector<HTMLImageElement>('.draw__icon');
+  const drawBackButton = document.getElementById('btn-back-to-start-draw');
+  if (!drawIcon) return;
+
+  drawIcon.src = getDrawIcon();
+  drawIcon.alt = 'Draw icon';
+  if (drawBackButton) {
+    drawBackButton.textContent = document.body.dataset.theme === 'gaming' ? 'home' : 'Back to start';
+  }
+}
+
 function handleMatch(first: HTMLElement, second: HTMLElement): void {
   first.classList.add('is-matched', `card--matched-${gameState.currentPlayer}`);
   second.classList.add('is-matched', `card--matched-${gameState.currentPlayer}`);
@@ -231,6 +295,18 @@ function handleMatch(first: HTMLElement, second: HTMLElement): void {
     setTimeout(() => {
       updateGameOverScreen();
       showScreen('screen-gameover');
+
+      setTimeout(() => {
+        const winner = getWinner();
+        if (winner === 'draw') {
+          updateDrawScreen();
+          showScreen('screen-draw');
+          return;
+        }
+
+        updateWinnerScreen();
+        showScreen('screen-winner');
+      }, 1000);
     }, 800);
   }
 }
