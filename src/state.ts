@@ -1,3 +1,10 @@
+/* ==========================================================================
+  TYPES
+  ========================================================================== */
+
+/**
+ * Central runtime state shared by UI and game modules.
+ */
 export interface GameState {
   // Settings (set before game starts)
   theme: 'code-vibes' | 'gaming';
@@ -10,6 +17,13 @@ export interface GameState {
   isLocked: boolean;
 }
 
+/* ==========================================================================
+  DEFAULT STATE
+  ========================================================================== */
+
+/**
+ * Mutable in-memory game state.
+ */
 export const gameState: GameState = {
   theme: 'code-vibes',
   player: 'blue',
