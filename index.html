@@ -127,18 +127,27 @@
               <span id="gameover-orange-label">Orange </span><span id="gameover-orange-score" class="score__value">0</span>
             </span>
           </div>
-          <button id="btn-see-results" class="btn btn--primary btn--large">See Results</button>
         </div>
       </section>
 
-      <section id="screen-result" class="screen result">
-        <div class="result__card">
-          <h2 class="result__title">The Winner is...</h2>
-          <div class="result__winner-info">
-            <img src="/img/00_general/pockal.png" alt="Winner" class="result__icon" />
-            <p class="result__player-name">Orange Player</p>
+      <section id="screen-winner" class="screen winner">
+        <div class="winner__content">
+          <img class="winner__header-icon" src="/img/00_general/confetti.png" alt="" />
+          <h2 class="winner__title">The winner is</h2>
+          <div class="winner__winner" data-winner="blue">
+            <p id="winner-name" class="winner__winner-name">Blue Player</p>
+            <img id="winner-icon" class="winner__winner-icon" src="/img/00_general/pockal.png" alt="Winner trophy" />
           </div>
-          <button id="btn-restart" class="btn btn--primary">Play Again</button>
+          <button id="btn-back-to-start-winner" class="btn btn--exit winner__back-btn" type="button">Back to start</button>
+        </div>
+      </section>
+
+      <section id="screen-draw" class="screen draw">
+        <div class="draw__content">
+          <h2 class="draw__title">It's a</h2>
+          <p class="draw__name">DRAW</p>
+          <img class="draw__icon" src="/img/00_general/draw_icon_code.png" alt="Draw" />
+          <button id="btn-back-to-start-draw" class="btn btn--exit draw__back-btn" type="button">Back to start</button>
         </div>
       </section>
     </div>
