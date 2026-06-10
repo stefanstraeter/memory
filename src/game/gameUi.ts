@@ -1,17 +1,7 @@
 import { gameState } from '../state';
 import { createCardTemplate, createHeaderTemplate } from '../templates';
-import { createCardValues, getDrawIcon, getPlayerIcon, getThemeFolder, getWinnerIcon, getWinnerLabel, type Winner } from './helpers';
-
-/* ==========================================================================
-  TYPES
-  ========================================================================== */
-
-type ExitModalElements = {
-  exitBtn: HTMLButtonElement;
-  modal: HTMLElement;
-  backBtn: HTMLButtonElement;
-  confirmBtn: HTMLButtonElement;
-};
+import type { ExitModalElements, Winner } from '../types';
+import { createCardValues, getDrawIcon, getPlayerIcon, getThemeFolder, getWinnerIcon, getWinnerLabel } from './helpers';
 
 /* ==========================================================================
   EXIT MODAL INTERACTIONS
