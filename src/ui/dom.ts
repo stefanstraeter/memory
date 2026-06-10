@@ -1,3 +1,5 @@
+import { assetPath } from '../assets';
+
 /* ==========================================================================
   DOM REFERENCES
   ========================================================================== */
@@ -17,6 +19,6 @@ export const selectedSizeLabel = document.getElementById('selected-size') as HTM
  * Theme preview image paths by theme key.
  */
 export const themePreviews = {
-  'code-vibes': '/img/01_themes/vibes_theme/vibe_theme.png',
-  'gaming': '/img/01_themes/game_theme/game_theme.png',
+  'code-vibes': assetPath('/img/01_themes/vibes_theme/vibe_theme.png'),
+  'gaming': assetPath('/img/01_themes/game_theme/game_theme.png'),
 };
