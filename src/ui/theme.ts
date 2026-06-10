@@ -1,3 +1,5 @@
+import { assetPath } from '../assets';
+
 /* ==========================================================================
   TYPES
   ========================================================================== */
@@ -40,7 +42,9 @@ export function applyEndScreenThemeAssets(theme: Theme): void {
   const drawIcon = document.querySelector<HTMLImageElement>('.draw__icon');
   if (!drawIcon) return;
 
-  drawIcon.src = theme === 'gaming' ? '/img/00_general/draw_icon_game.png' : '/img/00_general/draw_icon_code.png';
+  drawIcon.src = theme === 'gaming'
+    ? assetPath('/img/00_general/draw_icon_game.png')
+    : assetPath('/img/00_general/draw_icon_code.png');
   drawIcon.alt = 'Draw icon';
 }
 
