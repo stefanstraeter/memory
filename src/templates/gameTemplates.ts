@@ -1,20 +1,5 @@
 import { assetPath } from '../assets';
-
-/* ==========================================================================
-  TYPES
-  ========================================================================== */
-
-type Player = 'blue' | 'orange';
-
-type HeaderTemplateData = {
-  showColorLabels: boolean;
-  backButtonText: string;
-  exitButtonText: string;
-  blueIcon: string;
-  orangeIcon: string;
-  currentPlayerIcon: string;
-  currentPlayerAlt: Player;
-};
+import type { HeaderTemplateData } from '../types';
 
   /* ==========================================================================
     TEMPLATE FACTORIES
