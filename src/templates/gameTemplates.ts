@@ -1,3 +1,5 @@
+import { assetPath } from '../assets';
+
 /* ==========================================================================
   TYPES
   ========================================================================== */
@@ -52,7 +54,7 @@ export function createHeaderTemplate(data: HeaderTemplateData): string {
         <img class="current-indicator" src="${currentPlayerIcon}" alt="${currentPlayerAlt}">
       </div>
       <button id="btn-exit-game" class="btn btn--exit" type="button">
-        <img src="/img/00_general/move_item.png" alt=""> Exit game
+        <img src="${assetPath('/img/00_general/move_item.png')}" alt=""> Exit game
       </button>
     </div>
     <div id="exit-game-modal" class="game-exit-modal" aria-hidden="true">
@@ -78,10 +80,10 @@ export function createCardTemplate(cardValue: number, themeFolder: string): stri
   return `
     <div class="card__inner">
       <div class="card__front">
-        <img src="/img/01_themes/${themeFolder}/cards/card_background.png" alt="">
+        <img src="${assetPath(`/img/01_themes/${themeFolder}/cards/card_background.png`)}" alt="">
       </div>
       <div class="card__back">
-        <img src="/img/01_themes/${themeFolder}/cards/card${cardValue}.png" alt="Card ${cardValue}">
+        <img src="${assetPath(`/img/01_themes/${themeFolder}/cards/card${cardValue}.png`)}" alt="Card ${cardValue}">
       </div>
     </div>
   `;
