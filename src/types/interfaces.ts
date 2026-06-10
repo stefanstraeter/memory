@@ -1,3 +1,5 @@
+import type { Player, Theme } from './types';
+
 /* ==========================================================================
   INTERFACES
   ========================================================================== */
@@ -7,11 +9,11 @@
  */
 export interface GameState {
   // Settings (set before game starts)
-  theme: 'code-vibes' | 'gaming';
-  player: 'blue' | 'orange';
+  theme: Theme;
+  player: Player;
   boardSize: number;
-  currentPlayer: 'blue' | 'orange';
-  scores: { blue: number; orange: number };
+  currentPlayer: Player;
+  scores: Record<Player, number>;
   flippedCards: HTMLElement[];
   matchedPairs: number;
   isLocked: boolean;
