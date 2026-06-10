@@ -87,7 +87,7 @@ export function getWinnerLabel(winner: Exclude<Winner, 'draw'>): string {
 }
 
 /* ==========================================================================
-   CARD GENERATION
+   CARD SHUFFLE AND VALUE HELPERS
    ========================================================================== */
 
 /**
