@@ -1,4 +1,5 @@
 import { gameState } from '../state';
+import { assetPath } from '../assets';
 
 /* ==========================================================================
   TYPES
@@ -27,9 +28,9 @@ export function getThemeFolder(): string {
  */
 export function getPlayerIcon(player: 'blue' | 'orange'): string {
   if (gameState.theme === 'gaming') {
-    return `/img/00_general/chess_${player}.png`;
+    return assetPath(`/img/00_general/chess_${player}.png`);
   }
-  return `/img/00_general/label_${player}.svg`;
+  return assetPath(`/img/00_general/label_${player}.svg`);
 }
 
 /**
@@ -42,10 +43,10 @@ export function getWinnerIcon(player: 'blue' | 'orange'): string {
   const activeTheme = document.body.dataset.theme === 'gaming' ? 'gaming' : 'code-vibes';
 
   if (activeTheme === 'gaming') {
-    return '/img/00_general/draw_icon_game.png';
+    return assetPath('/img/00_general/draw_icon_game.png');
   }
 
-  return `/img/00_general/chess_${player}.png`;
+  return assetPath(`/img/00_general/chess_${player}.png`);
 }
 
 /**
@@ -55,7 +56,9 @@ export function getWinnerIcon(player: 'blue' | 'orange'): string {
  */
 export function getDrawIcon(): string {
   const activeTheme = document.body.dataset.theme === 'gaming' ? 'gaming' : 'code-vibes';
-  return activeTheme === 'gaming' ? '/img/00_general/draw_icon_game.png' : '/img/00_general/draw_icon_code.png';
+  return activeTheme === 'gaming'
+    ? assetPath('/img/00_general/draw_icon_game.png')
+    : assetPath('/img/00_general/draw_icon_code.png');
 }
 
 /* ==========================================================================
