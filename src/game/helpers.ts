@@ -1,11 +1,6 @@
 import { gameState } from '../state';
 import { assetPath } from '../assets';
-
-/* ==========================================================================
-  TYPES
-  ========================================================================== */
-
-export type Winner = 'blue' | 'orange' | 'draw';
+import type { Player, Winner } from '../types';
 
 /* ==========================================================================
   ASSET HELPERS
@@ -26,7 +21,7 @@ export function getThemeFolder(): string {
  * @param player - Player color key.
  * @returns Icon path.
  */
-export function getPlayerIcon(player: 'blue' | 'orange'): string {
+export function getPlayerIcon(player: Player): string {
   if (gameState.theme === 'gaming') {
     return assetPath(`/img/00_general/chess_${player}.png`);
   }
@@ -39,7 +34,7 @@ export function getPlayerIcon(player: 'blue' | 'orange'): string {
  * @param player - Winning player.
  * @returns Winner icon path.
  */
-export function getWinnerIcon(player: 'blue' | 'orange'): string {
+export function getWinnerIcon(player: Player): string {
   const activeTheme = document.body.dataset.theme === 'gaming' ? 'gaming' : 'code-vibes';
 
   if (activeTheme === 'gaming') {
