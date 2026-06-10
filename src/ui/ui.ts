@@ -8,7 +8,8 @@ import {
   createSettingsScreenTemplate,
   createWinnerScreenTemplate,
 } from '../templates';
-import { getActiveTheme, setupThemeSyncObserver, syncEndScreenTheme, type Theme } from './theme';
+import type { Theme } from '../types';
+import { getActiveTheme, setupThemeSyncObserver, syncEndScreenTheme } from './theme';
 
 const themePreviews = {
   'code-vibes': assetPath('/img/01_themes/vibes_theme/vibe_theme.png'),
