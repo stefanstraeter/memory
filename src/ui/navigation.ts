@@ -78,6 +78,7 @@ function setupEndScreenListeners(): void {
 
 function setupSettingsListeners(): void {
   setupThemeRadios();
+  setupThemeHoverListeners();
   setupPlayerRadios();
   setupBoardSizeRadios();
   setupStartButton();
@@ -119,6 +120,18 @@ function setupThemeRadios(): void {
       const nextTheme: Theme = radio.value === 'gaming' ? 'gaming' : 'code-vibes';
       syncEndScreenTheme(nextTheme);
       checkStartEnabled();
+    });
+  });
+}
+
+function setupThemeHoverListeners(): void {
+  document.querySelectorAll<HTMLInputElement>('input[name="theme"]').forEach(radio => {
+    radio.closest('label')?.addEventListener('mouseenter', () => {
+      updateThemePreview(radio.value);
+    });
+    radio.closest('label')?.addEventListener('mouseleave', () => {
+      const activeRadio = document.querySelector<HTMLInputElement>('input[name="theme"]:checked');
+      updateThemePreview(activeRadio?.value ?? 'code-vibes');
     });
   });
 }
