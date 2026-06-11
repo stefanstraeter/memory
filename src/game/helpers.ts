@@ -27,22 +27,26 @@ export function getWinnerLabel(winner: Exclude<Winner, 'draw'>): string {
  * Kombiniert Werte paarweise und mischt sie mit dem Fisher-Yates-Algorithmus.
  */
 export function createCardValues(boardSize: number): number[] {
-  const pairCount = boardSize / 2;
-  const values: number[] = [];
-  
-  for (let i = 1; i <= pairCount; i++) {
-    values.push(i, i);
+  const numberOfPairs = boardSize / 2;
+  const uniqueValues: number[] = [];
+
+  for (let i = 1; i <= numberOfPairs; i++) {
+    uniqueValues.push(i);
   }
-  return shuffleArray(values);
+
+  const deck = [...uniqueValues, ...uniqueValues];
+
+  return shuffle(deck);
 }
 
 /**
  * Reine Hilfsfunktion zum Mischen eines Arrays (In-place).
  */
-function shuffleArray(arr: number[]): number[] {
+function shuffle(array: number[]): number[] {
+  const arr = [...array];  
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[arr[i]]]; // Moderner, kurzer Tausch
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
 }
