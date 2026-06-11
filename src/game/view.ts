@@ -175,10 +175,12 @@ export function updateWinnerScreen(winner: Exclude<Winner, 'draw'>): void {
   const winnerName = document.getElementById('winner-name');
 
   if (!screen || !winnerName) return;
+
   screen.dataset.winner = winner;
   if (winnerCard) winnerCard.dataset.winner = winner;
-  winnerName.textContent = getWinnerLabel(winner);
-
+  
+  winnerName.textContent = winner === 'blue' ? 'Blue player' : 'Orange player';
+  
   updateWinnerAssets(winner);
 }
 
@@ -189,9 +191,11 @@ export function updateWinnerScreen(winner: Exclude<Winner, 'draw'>): void {
 function updateWinnerAssets(winner: Exclude<Winner, 'draw'>): void {
   const icon = document.getElementById('winner-icon') as HTMLImageElement | null;
   const btn = document.getElementById('btn-back-to-start-winner');
-  const isGaming = document.body.dataset.theme === 'gaming';
+  const isGaming = gameState.theme === 'gaming';
 
-  if (btn) btn.textContent = isGaming ? 'home' : 'Back to start';
+  if (btn) {
+    btn.textContent = isGaming ? 'home' : 'Back to start';
+  }
   if (icon) {
     icon.src = getWinnerIcon(winner);
     icon.alt = isGaming ? 'Winner trophy' : winner;
