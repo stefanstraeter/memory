@@ -158,3 +158,37 @@ body[data-theme="gaming"] .winner {
     }
   }
 }
+
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.winner {
+  &.slide-in-top {
+    animation: slideInFromTop 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  }
+
+  &--gaming {
+    &.slide-in-bottom {
+      animation: slideInFromBottom 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+  }
+}
