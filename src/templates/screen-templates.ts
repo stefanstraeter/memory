@@ -1,7 +1,14 @@
+
 import { assetPath } from '../assets';
 
-
-
+  /* ==========================================================================
+    TEMPLATE HOME SCREEN
+    ========================================================================== */
+/**
+ * @description Creates home screen markup for lazy mounting.
+ * @export
+ * @return {*}  {string} - The HTML string representing the home screen template, which includes a title, subtitle, play button, and a decorative image of a yellow Stadia controller.
+ */
 export function createHomeScreenTemplate(): string {
   return `
     <section id="screen-home" class="screen home">
@@ -22,9 +29,14 @@ export function createHomeScreenTemplate(): string {
   `;
 }
 
+  /* ==========================================================================
+    TEMPLATE SETTINGS SCREEN
+    ========================================================================== */
 
 /**
- * Creates settings screen markup for lazy mounting.
+ * @description Creates settings screen markup for lazy mounting, which includes options for selecting game themes, player colors, and board sizes, as well as a preview image and a start button that becomes enabled once all selections are made.
+ * @export
+ * @return {*}  {string} - The HTML string representing the settings screen template, which contains fieldsets for game themes, player selection, and board size, along with a preview image and a start button.
  */
 export function createSettingsScreenTemplate(): string {
   return `
@@ -116,8 +128,14 @@ export function createSettingsScreenTemplate(): string {
   `;
 }
 
+  /* ==========================================================================
+    TEMPLATE GAME SCREEN
+    ========================================================================== */
+
 /**
- * Creates gameplay screen markup for lazy mounting.
+ * @description Creates game screen markup for lazy mounting, which includes a header for displaying game information and a board area where the memory grid will be rendered.
+ * @export
+ * @return {*}  {string} - The HTML string representing the game screen template, which consists of a section with an id of "screen-game" and a class of "screen game", containing a header for game information and a div for the memory grid.
  */
 export function createGameScreenTemplate(): string {
   return `
@@ -130,8 +148,14 @@ export function createGameScreenTemplate(): string {
   `;
 }
 
+  /* ==========================================================================
+    TEMPLATE GAME OVER SCREEN
+    ========================================================================== */
+
 /**
- * Creates game-over screen markup for lazy mounting.
+ * @description Creates game-over screen markup for lazy mounting, which includes a title, subtitle, and final scores for each player.
+ * @export
+ * @return {*}  {string} - The HTML string representing the game-over screen template, which consists of a section with an id of "screen-gameover" and a class of "screen gameover", containing a div for the game-over content, including the title, subtitle, and final scores.
  */
 export function createGameOverScreenTemplate(): string {
   return `
@@ -154,8 +178,14 @@ export function createGameOverScreenTemplate(): string {
   `;
 }
 
+  /* ==========================================================================
+    TEMPLATE WINNER SCREEN
+    ========================================================================== */
+
 /**
- * Creates winner screen markup for lazy mounting.
+ * @description Creates winner screen markup for lazy mounting, which includes a header icon, a title, the winner's name and icon, and a button to return to the start screen.
+ * @export
+ * @return {*}  {string} - The HTML string representing the winner screen template, which consists of a section with an id of "screen-winner" and a class of "screen winner", containing a div for the winner content, including the header icon, title, winner's name and icon, and a back button.
  */
 export function createWinnerScreenTemplate(): string {
   return `
@@ -173,8 +203,13 @@ export function createWinnerScreenTemplate(): string {
   `;
 }
 
+  /* ==========================================================================
+    TEMPLATE DRAW SCREEN
+    ========================================================================== */
 /**
- * Creates draw screen markup for lazy mounting.
+ * @description Creates draw screen markup for lazy mounting, which includes a title, subtitle, and an icon indicating a draw, along with a button to return to the start screen.
+ * @export
+ * @return {*}  {string} - The HTML string representing the draw screen template, which consists of a section with an id of "screen-draw" and a class of "screen draw", containing a div for the draw content, including the title, subtitle, icon, and a back button.
  */
 export function createDrawScreenTemplate(): string {
   return `
