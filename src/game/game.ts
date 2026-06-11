@@ -1,15 +1,29 @@
+// src/game/game.ts
 import { gameState } from '../state';
-import { showScreen } from '../ui/ui';
 import { getWinner } from './helpers';
-import { buildGrid, buildHeader, setupExitModal, updateDrawScreen, updateGameOverScreen, updateHeader, updateWinnerScreen } from './ui';
+import { 
+  showSettingsScreen, 
+  showGameOverScreen, 
+  showWinnerScreen, 
+  showDrawScreen 
+} from '../ui/ui';
+import { 
+  buildGrid, 
+  buildHeader, 
+  setupExitModal, 
+  updateDrawScreen, 
+  updateGameOverScreen, 
+  updateHeader, 
+  updateWinnerScreen 
+} from './ui';
+
+// Hilfsfunktion für lesbare Pausen ohne Callback-Verschachtelung
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 /* ==========================================================================
-   SETUP FUNCTIONS
+   SETUP & EXIT FUNCTIONS
    ========================================================================== */
 
-/**
- * Resets runtime game state for a fresh match.
- */
 function resetState(): void {
   gameState.currentPlayer = gameState.player;
   gameState.scores = { blue: 0, orange: 0 };
@@ -18,86 +32,60 @@ function resetState(): void {
   gameState.isLocked = false;
 }
 
-/**
- * Handles confirmed game exit and returns to settings.
- */
 function handleExitConfirmation(): void {
   resetState();
   document.body.dataset.theme = 'code-vibes';
-  showScreen('screen-settings');
+  showSettingsScreen();
 }
 
 /* ==========================================================================
-    VIEW UPDATERS
+    MATCH LOGIC (EINE AUFGABE PRO FUNKTION)
    ========================================================================== */
 
-/**
- * Applies all state updates after a successful match.
- *
- * @param first - First matched card.
- * @param second - Second matched card.
- */
 function applyMatchState(first: HTMLElement, second: HTMLElement): void {
-  first.classList.add('is-matched', `card--matched-${gameState.currentPlayer}`);
-  second.classList.add('is-matched', `card--matched-${gameState.currentPlayer}`);
+  const playerClass = `card--matched-${gameState.currentPlayer}`;
+  first.classList.add('is-matched', playerClass);
+  second.classList.add('is-matched', playerClass);
 
   gameState.scores[gameState.currentPlayer]++;
   gameState.matchedPairs++;
   gameState.flippedCards = [];
   gameState.isLocked = false;
-
-  updateHeader();
 }
 
-/**
- * Shows the winner or draw screen after the game-over screen has been visible.
- */
 function showFinalResultScreen(): void {
   const winner = getWinner();
   if (winner === 'draw') {
     updateDrawScreen();
-    showScreen('screen-draw');
-    return;
+    showDrawScreen();
+  } else {
+    updateWinnerScreen(winner);
+    showWinnerScreen();
   }
-
-  updateWinnerScreen(winner);
-  showScreen('screen-winner');
 }
 
 /**
- * Runs the end-of-game screen sequence.
+ * Steuert den Ablauf am Spielende. Jede Zeile wartet lesbar ab.
+ * Das Game Over bleibt exakt 3 Sekunden für den Spieler stehen!
  */
-function runEndOfGameSequence(): void {
-  setTimeout(() => {
-    updateGameOverScreen();
-    showScreen('screen-gameover');
+async function runEndOfGameSequence(): Promise<void> {
+  await delay(1500);
+  showGameOverScreen();
+  updateGameOverScreen();
 
-    setTimeout(() => {
-      showFinalResultScreen();
-    }, 3000);
-  }, 2000);
+  await delay(3000); 
+  showFinalResultScreen();
 }
 
-/**
- * Handles a successful pair match.
- *
- * @param first - First matched card.
- * @param second - Second matched card.
- */
 function handleMatch(first: HTMLElement, second: HTMLElement): void {
   applyMatchState(first, second);
+  updateHeader();
 
   if (gameState.matchedPairs === gameState.boardSize / 2) {
     runEndOfGameSequence();
   }
 }
 
-/**
- * Handles a mismatch and switches current player.
- *
- * @param first - First flipped card.
- * @param second - Second flipped card.
- */
 function handleMismatch(first: HTMLElement, second: HTMLElement): void {
   setTimeout(() => {
     first.classList.remove('is-flipped');
@@ -111,9 +99,6 @@ function handleMismatch(first: HTMLElement, second: HTMLElement): void {
   }, 1000);
 }
 
-/**
- * Compares the two flipped cards and routes to match/mismatch flow.
- */
 function checkMatch(): void {
   const [first, second] = gameState.flippedCards;
   const isMatch = first.dataset.value === second.dataset.value;
@@ -125,15 +110,20 @@ function checkMatch(): void {
   }
 }
 
-/**
- * Handles click interaction for a single card.
- *
- * @param card - Clicked card element.
- */
+/* ==========================================================================
+   CLICK INTERACTION
+   ========================================================================== */
+
+function isCardClickInvalid(card: HTMLElement): boolean {
+  return (
+    gameState.isLocked ||
+    card.classList.contains('is-flipped') ||
+    card.classList.contains('is-matched')
+  );
+}
+
 function handleCardClick(card: HTMLElement): void {
-  if (gameState.isLocked) return;
-  if (card.classList.contains('is-flipped')) return;
-  if (card.classList.contains('is-matched')) return;
+  if (isCardClickInvalid(card)) return;
 
   card.classList.add('is-flipped');
   gameState.flippedCards.push(card);
@@ -148,9 +138,6 @@ function handleCardClick(card: HTMLElement): void {
    INITIALIZATION
    ========================================================================== */
 
-/**
- * Initializes game UI and event handlers for a new match.
- */
 export function initGame(): void {
   const grid = document.getElementById('memory-grid');
   const header = document.querySelector('.game__header');
