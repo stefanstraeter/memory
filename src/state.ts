@@ -4,9 +4,6 @@ import type { GameState } from './types';
   DEFAULT STATE
   ========================================================================== */
 
-/**
- * Mutable in-memory game state.
- */
 export const gameState: GameState = {
   theme: 'code-vibes',
   player: 'blue',
