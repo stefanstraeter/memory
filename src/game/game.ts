@@ -70,11 +70,13 @@ function applyMatchState(first: HTMLElement, second: HTMLElement): void {
 function showFinalResultScreen(): void {
   const winner = getWinner();
   if (winner === 'draw') {
-    updateDrawScreen();
     showDrawScreen();
+    updateDrawScreen();
+
   } else {
-    updateWinnerScreen(winner);
     showWinnerScreen();
+    updateWinnerScreen(winner);
+
   }
 }
 
