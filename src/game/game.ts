@@ -6,7 +6,7 @@ import {
   showGameOverScreen, 
   showWinnerScreen, 
   showDrawScreen 
-} from '../ui/ui';
+} from '../ui/navigation';
 import { 
   buildGrid, 
   buildHeader, 
@@ -15,7 +15,7 @@ import {
   updateGameOverScreen, 
   updateHeader, 
   updateWinnerScreen 
-} from './ui';
+} from './view';
 
 // Hilfsfunktion für lesbare Pausen ohne Callback-Verschachtelung
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
