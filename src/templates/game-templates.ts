@@ -1,3 +1,4 @@
+
 import { assetPath } from '../assets';
 import type { HeaderTemplateData } from '../types';
 
@@ -26,11 +27,11 @@ export function createHeaderTemplate(data: HeaderTemplateData): string {
     <div class="game__status">
       <div class="status__scores">
         <span class="score score--blue">
-          <img class="score__icon" src="${blueIcon}" alt="">
+          <img class="score__icon" src="${blueIcon}" alt="Blue player icon">
           ${showColorLabels ? 'Blue ' : ''}<span class="score__value">0</span>
         </span>
         <span class="score score--orange">
-          <img class="score__icon" src="${orangeIcon}" alt="">
+          <img class="score__icon" src="${orangeIcon}" alt="Orange player icon">
           ${showColorLabels ? 'Orange ' : ''}<span class="score__value">0</span>
         </span>
       </div>
@@ -65,7 +66,7 @@ export function createCardTemplate(cardValue: number, themeFolder: string): stri
   return `
     <div class="card__inner">
       <div class="card__front">
-        <img src="${assetPath(`/img/01_themes/${themeFolder}/cards/card_background.png`)}" alt="">
+        <img src="${assetPath(`/img/01_themes/${themeFolder}/cards/card_background.png`)}" alt="Card background">
       </div>
       <div class="card__back">
         <img src="${assetPath(`/img/01_themes/${themeFolder}/cards/card${cardValue}.png`)}" alt="Card ${cardValue}">
