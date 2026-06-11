@@ -194,7 +194,7 @@ export function createWinnerScreenTemplate(): string {
         <img class="winner__header-icon" src="${assetPath('/img/00_general/confetti.png')}" alt="" />
         <h2 class="winner__title">The winner is</h2>
         <div class="winner__winner" data-winner="blue">
-          <p id="winner-name" class="winner__winner-name">Blue Player</p>
+          <p id="winner-name" class="winner__winner-name"></p>
           <img id="winner-icon" class="winner__winner-icon" src="${assetPath('/img/00_general/pockal.png')}" alt="Winner trophy" />
         </div>
         <button id="btn-back-to-start-winner" class="btn btn--exit winner__back-btn" type="button">Back to start</button>
