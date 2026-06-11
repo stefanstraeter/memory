@@ -183,21 +183,41 @@ export function createGameOverScreenTemplate(): string {
     ========================================================================== */
 
 /**
- * @description Creates winner screen markup for lazy mounting, which includes a header icon, a title, the winner's name and icon, and a button to return to the start screen.
+ * @description Creates winner screen markup for lazy mounting, which includes a title, an area to display the winner's name and icon, and a button to return to the start screen. The design of the winner screen varies based on the selected game theme, with one template for the "code vibes" theme and another for the "gaming" theme.
  * @export
- * @return {*}  {string} - The HTML string representing the winner screen template, which consists of a section with an id of "screen-winner" and a class of "screen winner", containing a div for the winner content, including the header icon, title, winner's name and icon, and a back button.
+ * @return {*}  {string} - The HTML string representing the winner screen template, which consists of a section with an id of "screen-winner" and a class of "screen winner", containing a div for the winner content, including the title, winner information, and a back button. The specific design elements and classes differ between the "code vibes" and "gaming" themes to reflect their respective aesthetics.
  */
-export function createWinnerScreenTemplate(): string {
+export function createVibesWinnerTemplate(): string {
   return `
-    <section id="screen-winner" class="screen winner">
+    <section id="screen-winner" class="screen winner slide-in-top">
       <div class="winner__content">
         <img class="winner__header-icon" src="${assetPath('/img/00_general/confetti.png')}" alt="" />
         <h2 class="winner__title">The winner is</h2>
-        <div class="winner__winner" data-winner="blue">
+        <div class="winner__winner" data-winner="">
           <p id="winner-name" class="winner__winner-name"></p>
-          <img id="winner-icon" class="winner__winner-icon" src="${assetPath('/img/00_general/pockal.png')}" alt="Winner trophy" />
+          <img id="winner-icon" class="winner__winner-icon" src="" alt="Winner trophy" />
         </div>
         <button id="btn-back-to-start-winner" class="btn btn--exit winner__back-btn" type="button">Back to start</button>
+      </div>
+    </section>
+  `;
+}
+
+/**
+ * @description Creates a winner screen template with a gaming theme for lazy mounting, which includes a title, an area to display the winner's name and icon, and a button to return to the start screen. The design of this template is tailored to fit the gaming theme, featuring a more dynamic layout and styling compared to the code vibes theme.
+ * @export
+ * @return {*}  {string} - The HTML string representing the gaming-themed winner screen template, which consists of a section with an id of "screen-winner" and a class of "screen winner winner--gaming", containing a div for the winner content, including the title, winner information, and a back button. The layout and styling of this template are designed to evoke a gaming atmosphere, with bold typography and a more energetic presentation.
+ */
+export function createGamingWinnerTemplate(): string {
+  return `
+    <section id="screen-winner" class="screen winner winner--gaming slide-in-bottom">
+      <div class="winner__content">
+        <h2 class="winner__title">STAGE CLEAR!</h2>
+        <div class="winner__winner" data-winner="">
+          <p id="winner-name" class="winner__winner-name"></p>
+          <img id="winner-icon" class="winner__winner-icon" src="" alt="Winner trophy" />
+        </div>
+        <button id="btn-back-to-start-winner" class="btn btn--exit winner__back-btn" type="button">home</button>
       </div>
     </section>
   `;
