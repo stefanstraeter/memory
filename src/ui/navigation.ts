@@ -9,7 +9,8 @@ import {
   createGameOverScreenTemplate,
   createGameScreenTemplate,
   createSettingsScreenTemplate,
-  createWinnerScreenTemplate,
+  createVibesWinnerTemplate, 
+  createGamingWinnerTemplate,
 } from '../templates/screen-templates';
 
 /* ==========================================================================
@@ -67,11 +68,15 @@ export function showGameOverScreen(): void {
 }
 
 /**
- * @description Displays the winner screen and synchronizes its theme with the active theme.
+ * @description Displays the winner screen based on the active theme and synchronizes its styles.
  * @export
  */
 export function showWinnerScreen(): void {
-  renderScreen(createWinnerScreenTemplate());
+  const winnerHtml = gameState.theme === 'gaming' 
+    ? createGamingWinnerTemplate() 
+    : createVibesWinnerTemplate();
+
+  renderScreen(winnerHtml);
   syncEndScreenTheme(getActiveTheme()); 
   setupEndScreenListeners();
 }
