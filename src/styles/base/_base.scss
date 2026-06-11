@@ -1,9 +1,22 @@
 @use "../abstracts/variables" as v;
 
+body {
+  background-color: v.$color-bg-dark;
+
+  &[data-theme="code-vibes"] {
+    background-color: v.$color-bg-dark;
+  }
+
+  &[data-theme="gaming"] {
+    background-color: v.theme-val("gaming", "main-bg-dark");
+  }
+}
+
 #app {
   height: 100%;
   width: 100%;
   position: relative;
+  background-color: transparent;
 }
 
 .screen {
