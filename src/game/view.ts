@@ -45,8 +45,6 @@ function closeExitModal(modal: HTMLElement): void {
  * @description Sets up the exit modal functionality by attaching event listeners to the exit, back, and confirm buttons.
  * @export
  * @param {Element} header - The header element containing the exit modal elements.
- * @param {() => void} onExitConfirmed - A callback function to be called when the exit is confirmed.
- * @return {*}  {void} - Returns nothing.
  */
 export function setupExitModal(header: Element, onExitConfirmed: () => void): void {
   const elements = getExitModalElements(header);
@@ -87,7 +85,6 @@ export function buildHeader(header: Element): void {
 /**
  * @description Creates a card element with the specified value and click handler.
  * @param {number} val - The value to be assigned to the card's data attribute and used in the card template.
- * @param {(card: HTMLElement) => void} onCardClick - A callback function to be called when the card is clicked, receiving the card element as an argument.
  * @return {*}  {HTMLButtonElement} - The created card element.
  */
 function createCard(val: number, onCardClick: (card: HTMLElement) => void): HTMLButtonElement {
@@ -103,8 +100,6 @@ function createCard(val: number, onCardClick: (card: HTMLElement) => void): HTML
  * @description Builds the game grid by clearing its content, setting its class based on the current board size, generating card values, and appending card elements created with the createCard function.
  * @export
  * @param {HTMLElement} grid - The grid element to be built.
- * @param {(card: HTMLElement) => void} onCardClick - A callback function to be called when any card is clicked, receiving the clicked card element as an argument.
- * @return {*}  {void} - Returns nothing.
  */
 export function buildGrid(grid: HTMLElement, onCardClick: (card: HTMLElement) => void): void {
   grid.innerHTML = '';
@@ -167,7 +162,6 @@ function updateGameOverLabels(): void {
  * @description Updates the winner screen by setting the winner's name and icon based on the provided winner parameter, and updating the back button text according to the current theme of the game.
  * @export
  * @param {Exclude<Winner, 'draw'>} winner - The winner of the game, which can be either 'blue' or 'orange', but not 'draw'.
- * @return {*}  {void} - Returns nothing.
  */
 export function updateWinnerScreen(winner: Exclude<Winner, 'draw'>): void {
   const screen = document.getElementById('screen-winner');

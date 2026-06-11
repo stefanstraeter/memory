@@ -155,10 +155,10 @@ function isCardClickInvalid(card: HTMLElement): boolean {
     card.classList.contains('is-matched')
   );
 }
+
 /**
  * @description Handles the logic when a card is clicked, flipping it and checking for matches if two cards are flipped. It also checks for invalid clicks to prevent actions when the game is locked or the card is already flipped or matched.
  * @param {HTMLElement} card - The card element that was clicked.
- * @return {*}  {void} 
  */
 function handleCardClick(card: HTMLElement): void {
   if (isCardClickInvalid(card)) return;
@@ -179,7 +179,6 @@ function handleCardClick(card: HTMLElement): void {
 /** 
  * @description Initializes the game by setting up the grid, header, and exit modal, and resetting the game state.
  * @export 
- * @return {*}  {void} - Returns nothing, but sets up the game interface and state for a new game session.
  */
 export function initGame(): void {
   const grid = document.getElementById('memory-grid');
