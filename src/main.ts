@@ -1,12 +1,13 @@
+
 import './styles/main.scss';
 import { initUI } from './ui/navigation';
 
 /* ==========================================================================
-	INITIALIZATION
+	INITIALIZATION AND EVENT LISTENERS
 	========================================================================== */
 
 /**
- * Boots the UI once the main bundle is loaded.
+ * Initialize the UI components and event listeners.
  */
 initUI();
 
