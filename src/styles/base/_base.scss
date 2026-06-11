@@ -8,12 +8,6 @@
 
 .screen {
   min-height: 100dvh;
-
-  &:not(.screen--active) {
-    display: none !important;
-  }
-
-  &--active {
-    display: flex !important;
-  }
+  display: flex;
+  flex-direction: column;
 }
