@@ -29,9 +29,6 @@ export type ExitModalElements = {
   INTERFACES
   ========================================================================== */
 
-/**
- * Central runtime state shared by UI and game modules.
- */
 export interface GameState {
   // Settings (set before game starts)
   theme: Theme;
