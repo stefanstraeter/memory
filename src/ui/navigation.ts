@@ -163,7 +163,7 @@ function updateThemePreview(radioValue: string): void {
 }
 
 /**
- * @description Sets up event listeners for theme radio buttons to update the theme preview and synchronize the end screen theme when a new theme is selected. Also checks if the start button should be enabled based on the current selections.
+ * @description Sets up event listeners for theme radio buttons to update the theme preview and synchronize the end screen theme when a new theme is selected. 
  */
 function setupThemeRadios(): void {
   document.querySelectorAll<HTMLInputElement>('input[name="theme"]').forEach(radio => {
@@ -177,7 +177,7 @@ function setupThemeRadios(): void {
 }
 
 /**
- * @description Sets up hover event listeners on theme radio button labels to temporarily update the theme preview when hovering over different theme options, and reverts to the active theme preview when the mouse leaves the label.
+ * @description Sets up hover event listeners on theme radio button labels to temporarily update the theme preview when hovering over different theme options.
  */
 function setupThemeHoverListeners(): void {
   document.querySelectorAll<HTMLInputElement>('input[name="theme"]').forEach(radio => {

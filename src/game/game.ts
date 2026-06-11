@@ -82,7 +82,7 @@ function showFinalResultScreen(): void {
 
 /**
  * @description Runs the end-of-game sequence by showing the game over screen, updating it, and then showing the final result screen after a delay.
- * @return {*}  {Promise<void>} - A promise that resolves when the end-of-game sequence is complete.
+ * @return {Promise<void>} A promise that resolves after the end-of-game sequence is completed.
  */
 async function runEndOfGameSequence(): Promise<void> {
   await delay(1500);
@@ -146,7 +146,7 @@ function checkMatch(): void {
 /**
  * @description Determines if a card click is invalid by checking if the game is currently locked or if the card is already flipped or matched.
  * @param {HTMLElement} card - The card element that was clicked.
- * @return {*}  {boolean} - Returns true if the click is invalid, false otherwise.
+ * @return {boolean} True if the card click is invalid, false otherwise.
  */
 function isCardClickInvalid(card: HTMLElement): boolean {
   return (

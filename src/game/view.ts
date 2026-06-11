@@ -11,7 +11,7 @@ import { createCardValues, getDrawIcon, getPlayerIcon, getThemeFolder, getWinner
 /**
  * @description Retrieves the elements related to the exit modal from the header.
  * @param {Element} header - The header element containing the exit modal elements.
- * @return {*}  {(ExitModalElements | null)} - The exit modal elements or null if any element is missing.
+ * @return {ExitModalElements | null} - An object containing the exit button, modal, back button, and confirm button elements, or null if any of the elements are not found.  
  */
 function getExitModalElements(header: Element): ExitModalElements | null {
   const exitBtn = header.querySelector<HTMLButtonElement>('#btn-exit-game');
@@ -85,7 +85,8 @@ export function buildHeader(header: Element): void {
 /**
  * @description Creates a card element with the specified value and click handler.
  * @param {number} val - The value to be assigned to the card's data attribute and used in the card template.
- * @return {*}  {HTMLButtonElement} - The created card element.
+ * @param {(card: HTMLElement) => void} onCardClick - The function to be called when the card is clicked.
+ * @return {HTMLButtonElement} - The created card element with the appropriate classes, data attributes, inner HTML, and click event listener.
  */
 function createCard(val: number, onCardClick: (card: HTMLElement) => void): HTMLButtonElement {
   const card = document.createElement('button');
@@ -148,6 +149,7 @@ export function updateGameOverScreen(): void {
 
 /**
  * @description Updates the game over labels by showing or hiding the player labels based on the current theme of the game. If the theme is 'gaming', the labels will be hidden; otherwise, they will be shown.
+ * @export
  */
 function updateGameOverLabels(): void {
   const blueLabel = document.getElementById('gameover-blue-label');
