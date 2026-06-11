@@ -1,5 +1,5 @@
 import './styles/main.scss';
-import { initUI } from './ui/ui';
+import { initUI } from './ui/navigation';
 
 /* ==========================================================================
 	INITIALIZATION
