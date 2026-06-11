@@ -1,5 +1,5 @@
 import { gameState } from '../state';
-import { initGame } from '../game';
+import { initGame } from '../game/game';
 import { assetPath } from '../assets';
 import {
   createDrawScreenTemplate,
@@ -7,7 +7,7 @@ import {
   createGameScreenTemplate,
   createSettingsScreenTemplate,
   createWinnerScreenTemplate,
-} from '../templates';
+} from '../templates/screen-templates';
 import type { Theme } from '../types';
 import { getActiveTheme, setupThemeSyncObserver, syncEndScreenTheme } from './theme';
 
