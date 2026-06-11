@@ -1,14 +1,16 @@
-// src/game/helpers.ts
+
 import { gameState } from '../state';
 import { assetPath } from '../assets';
 import type { Player, Winner } from '../types';
 
 /* ==========================================================================
-   1. PURE LOGIC & DATA HELPERS (Kein DOM, reine Berechnung)
+   PURE LOGIC & GAME MECHANICS HELPERS
    ========================================================================== */
 
 /**
- * Ermittelt rein mathematisch den Gewinner anhand der Punktestände.
+ * @description Determines the winner of the game by comparing the scores of both players, returning 'blue', 'orange', or 'draw' accordingly.
+ * @export
+ * @return {*}  {Winner} - The winner of the game, which can be 'blue', 'orange', or 'draw'.
  */
 export function getWinner(): Winner {
   if (gameState.scores.blue > gameState.scores.orange) return 'blue';
@@ -17,14 +19,20 @@ export function getWinner(): Winner {
 }
 
 /**
- * Übersetzt den Player-Key in einen sauberen Anzeige-String.
+ * @description Returns a human-readable label for the given winner, mapping 'blue' to 'BLUE PLAYER' and 'orange' to 'ORANGE PLAYER'.
+ * @export
+ * @param {Exclude<Winner, 'draw'>} winner - The winner of the game, which can be either 'blue' or 'orange' (but not 'draw').
+ * @return {*}  {string} - A string label representing the winner, such as 'BLUE PLAYER' or 'ORANGE PLAYER'.
  */
 export function getWinnerLabel(winner: Exclude<Winner, 'draw'>): string {
   return winner === 'blue' ? 'BLUE PLAYER' : 'ORANGE PLAYER';
 }
 
 /**
- * Kombiniert Werte paarweise und mischt sie mit dem Fisher-Yates-Algorithmus.
+ * @description Applies the match state to the two matched cards by incrementing the current player's score, updating the matched pairs count, clearing the flipped cards array, and unlocking the game for the next turn.
+ * @export
+ * @param {number} boardSize - The total number of cards on the board, used to determine when the game has ended.
+ * @return {*}  {number[]} - An array of numbers representing the shuffled card values for the game board, created based on the given board size.
  */
 export function createCardValues(boardSize: number): number[] {
   const numberOfPairs = boardSize / 2;
@@ -40,7 +48,9 @@ export function createCardValues(boardSize: number): number[] {
 }
 
 /**
- * Reine Hilfsfunktion zum Mischen eines Arrays (In-place).
+ * @description Shuffles an array of numbers using the Fisher-Yates algorithm, returning a new array with the elements in random order.
+ * @param {number[]} array - The array of numbers to be shuffled.
+ * @return {*}  {number[]} - A new array containing the same numbers as the input array but in a random order.
  */
 function shuffle(array: number[]): number[] {
   const arr = [...array];  
@@ -52,18 +62,23 @@ function shuffle(array: number[]): number[] {
 }
 
 /* ==========================================================================
-   2. UI & ASSET HELPERS (Zuständig für Pfade und Themes)
+   UI & ASSET HELPERS 
    ========================================================================== */
 
 /**
- * Gibt den passenden Ordnernamen für das gewählte Theme zurück.
+ * @description Returns the folder name for the current theme, which can be 'game_theme' or 'vibes_theme'.
+ * @export
+ * @return {*}  {string} - The folder name for the current theme.
  */
 export function getThemeFolder(): string {
   return gameState.theme === 'gaming' ? 'game_theme' : 'vibes_theme';
 }
 
 /**
- * Holt das Icon für die Live-Anzeige im Header während des Spiels.
+ * @description Returns the icon path for the given player based on the current theme.
+ * @export
+ * @param {Player} player - The player for whom to get the icon, which can be 'blue' or 'orange'.
+ * @return {*}  {string} - The file path to the player's icon image, which varies based on the current theme.
  */
 export function getPlayerIcon(player: Player): string {
   if (gameState.theme === 'gaming') {
@@ -72,8 +87,11 @@ export function getPlayerIcon(player: Player): string {
   return assetPath(`/img/00_general/label_${player}.svg`);
 }
 
-/**
- * Holt das spezifische Gewinner-Icon für den Endscreen.
+/** 
+ * @description Returns the icon path for the given player based on the current theme, using a specific draw icon for the gaming theme and a chess piece icon for the code vibes theme.
+ * @export
+ * @param {Player} player - The player for whom to get the winner icon, which can be 'blue' or 'orange'.
+ * @return {*}  {string} - The file path to the winner's icon image, which varies based on the current theme, using a draw icon for the gaming theme and a chess piece icon for the code vibes theme.
  */
 export function getWinnerIcon(player: Player): string {
   const activeTheme = document.body.dataset.theme;
@@ -84,7 +102,9 @@ export function getWinnerIcon(player: Player): string {
 }
 
 /**
- * Holt das Icon für das Unentschieden-Szenario.
+ * @description Returns the icon path for a draw result based on the current theme, using a specific draw icon for the gaming theme and a chess piece icon for the code vibes theme.
+ * @export
+ * @return {*}  {string} - The file path to the draw icon image, which varies based on the current theme, using a draw icon for the gaming theme and a chess piece icon for the code vibes theme.
  */
 export function getDrawIcon(): string {
   const activeTheme = document.body.dataset.theme;
