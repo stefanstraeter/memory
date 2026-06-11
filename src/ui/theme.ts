@@ -16,9 +16,15 @@ export function getActiveTheme(): Theme {
 }
 
 /* ==========================================================================
-  DYNAMIC ENDSCREEN THEMING (Just-in-Time aufgerufen)
+  DYNAMIC ENDSCREEN THEMING 
   ========================================================================== */
 
+/**
+ * @description Applies the appropriate labels to the end screen buttons based on the selected theme.
+ * @export
+ * @param {Theme} theme - The currently active theme, which determines the button labels to be applied.
+ * @return {void}
+ */
 export function applyEndScreenButtonLabels(theme: Theme): void {
   const label = theme === 'gaming' ? 'home' : 'Back to start';
   const winnerButton = document.getElementById('btn-back-to-start-winner');
@@ -28,6 +34,12 @@ export function applyEndScreenButtonLabels(theme: Theme): void {
   if (drawButton) drawButton.textContent = label;
 }
 
+/**
+ * @description Applies the appropriate theme assets to the end screen based on the selected theme.
+ * @export
+ * @param {Theme} theme - The currently active theme, which determines the assets to be applied.
+ * @return {void}
+ */
 export function applyEndScreenThemeAssets(theme: Theme): void {
   const drawIcon = document.querySelector<HTMLImageElement>('.draw__icon');
   if (!drawIcon) return;
@@ -38,8 +50,10 @@ export function applyEndScreenThemeAssets(theme: Theme): void {
 }
 
 /**
- * Synchronisiert die Elemente – wird jetzt direkt aufgerufen, 
- * NACHDEM der Screen frisch ins DOM geladen wurde.
+ * @description Synchronizes the end screen theme by applying the appropriate button labels and theme assets based on the selected theme.
+ * @export
+ * @param {Theme} theme - The currently active theme, which determines the end screen elements to be updated.
+ * @return {void}
  */
 export function syncEndScreenTheme(theme: Theme): void {
   applyEndScreenButtonLabels(theme);
