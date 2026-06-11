@@ -2,7 +2,7 @@
 @use "../abstracts/mixins" as m;
 
 .settings {
-  background-color: var(--main-bg-light);
+  background-color: v.$color-bg-light;
   flex-direction: column;
   align-items: center;
   justify-content: center;
