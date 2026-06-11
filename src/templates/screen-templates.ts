@@ -1,5 +1,28 @@
 import { assetPath } from '../assets';
 
+
+
+export function createHomeScreenTemplate(): string {
+  return `
+    <section id="screen-home" class="screen home">
+      <div class="home__content">
+        <span class="home__subtitle">It's time to play</span>
+        <h1 class="home__title">Ready to play?</h1>
+
+        <div class="home__actions">
+          <button id="btnPlay" class="btn btn--primary btn--large">
+            <img src="${assetPath('/img/00_general/stadia_controller.png')}" class="btn__icon" alt="Stadia Controller" />
+            Play
+            <span class="btn__arrow"></span>
+          </button>
+        </div>
+      </div>
+      <img src="${assetPath('/img/00_general/stadia_controller_yellow.png')}" class="home__controller" alt="Yellow Stadia Controller" />
+    </section>
+  `;
+}
+
+
 /**
  * Creates settings screen markup for lazy mounting.
  */
