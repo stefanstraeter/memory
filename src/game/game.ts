@@ -1,7 +1,7 @@
 import { gameState } from '../state';
-import { showScreen } from '../ui';
+import { showScreen } from '../ui/ui';
 import { getWinner } from './helpers';
-import { buildGrid, buildHeader, setupExitModal, updateDrawScreen, updateGameOverScreen, updateHeader, updateWinnerScreen } from './gameUi';
+import { buildGrid, buildHeader, setupExitModal, updateDrawScreen, updateGameOverScreen, updateHeader, updateWinnerScreen } from './ui';
 
 /* ==========================================================================
    SETUP FUNCTIONS
