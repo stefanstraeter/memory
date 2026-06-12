@@ -3,9 +3,9 @@ import { gameState } from '../state';
 import { getWinner } from './helpers';
 import { 
   showSettingsScreen, 
-  showGameOverScreen, 
   showWinnerScreen, 
-  showDrawScreen 
+  showDrawScreen,
+  renderScreen, 
 } from '../ui/navigation';
 import { 
   buildGrid, 
@@ -16,6 +16,7 @@ import {
   updateHeader, 
   updateWinnerScreen 
 } from './view';
+import { createGameOverScreenTemplate } from '../templates/screen-templates';
 
 
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -86,7 +87,7 @@ function showFinalResultScreen(): void {
  */
 async function runEndOfGameSequence(): Promise<void> {
   await delay(1500);
-  showGameOverScreen();
+  renderScreen(createGameOverScreenTemplate());
   updateGameOverScreen();
 
   await delay(3000); 
