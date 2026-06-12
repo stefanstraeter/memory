@@ -13,6 +13,7 @@ import {
   createGamingWinnerTemplate,
 } from '../templates/screen-templates';
 
+
 /* ==========================================================================
    CORE RENDERING FUNCTION
    ========================================================================== */
@@ -21,7 +22,7 @@ import {
  * @description Renders the provided HTML content into the main app container.
  * @param {string} htmlContent - The HTML string to be rendered on the screen.
  */
-function renderScreen(htmlContent: string): void {
+export function renderScreen(htmlContent: string): void {
   const appRoot = document.getElementById('app');
   if (appRoot) {
     appRoot.innerHTML = htmlContent;
@@ -48,23 +49,6 @@ export function showHomeScreen(): void {
 export function showSettingsScreen(): void {
   renderScreen(createSettingsScreenTemplate());
   setupSettingsListeners();
-}
-
-/**
- * @description Displays the game screen and initializes the game logic.
- * @export
- */
-export function showGameScreen(): void {
-  renderScreen(createGameScreenTemplate());
-  initGame();
-}
-
-/**
- * @description Displays the game over screen.
- * @export 
- */
-export function showGameOverScreen(): void {
-  renderScreen(createGameOverScreenTemplate());
 }
 
 /**
@@ -243,17 +227,8 @@ function saveSettingsToState(): void {
 function setupStartButton(): void {
   document.getElementById('btn-start')?.addEventListener('click', () => {
     saveSettingsToState();
-    showGameScreen();
+    renderScreen(createGameScreenTemplate());
+    initGame();
   });
 }
 
-/* ==========================================================================
-   APP INITIALIZATION
-   ========================================================================== */
-/**
- * @description Initializes the user interface by displaying the home screen.
- * @export
- */
-export function initUI(): void {
-  showHomeScreen();
-}
