@@ -1,14 +1,9 @@
 
 import './styles/main.scss';
-import { bootstrapApp } from './core/bootstrap';
+import { showHomeScreen } from './ui/navigation';
 
 /**
- * @fileoverview This file serves as the entry point for the Memory game application. It imports necessary styles and the bootstrap function to initialize the app. The code ensures that the application is bootstrapped once the DOM content is fully loaded, allowing for proper setup of event listeners and UI components.
- * setup of event listeners and UI components.
+ * The entry point of the application. It initializes the user interface once the DOM content is fully loaded.
  */
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', bootstrapApp);
-} else {
-  bootstrapApp(); 
-}
+document.addEventListener('DOMContentLoaded', showHomeScreen);
